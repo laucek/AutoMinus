@@ -67,6 +67,14 @@ namespace autominus.Controllers
             return View();
         }
 
+        public IActionResult HelpReview()
+        {
+            
+            return View();
+        }
+
+
+
         public IActionResult VartotojuSarasoLangas()
         {
             return View();
