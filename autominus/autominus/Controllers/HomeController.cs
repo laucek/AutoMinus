@@ -42,6 +42,31 @@ namespace autominus.Controllers
             
             return View();
         }
+        //-------------------------------------------------------------------------------------------------------
+        public IActionResult Forum()
+        {
+            return View();
+        }
+        public IActionResult NewForumQuestion()
+        {
+            return View();
+        }
+        public IActionResult ForumQuestion()
+        {
+            return View();
+        }
+        public IActionResult EditQuestion()
+        {
+            return View();
+        }
+        public IActionResult ForumQuestionArchive()
+        {
+            return View();
+        }
+        public IActionResult ForumQuestionAnswer()
+        {
+            return View();
+        }
 
         public IActionResult ProfileEdit()
         {
