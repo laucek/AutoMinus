@@ -28,7 +28,17 @@ namespace autominus.Controllers
 
         public IActionResult Login()
         {
-            
+
+            return View();
+        }
+        public IActionResult HelpEmail()
+        {
+
+            return View();
+        }
+        public IActionResult HelpLive()
+        {
+
             return View();
         }
 
