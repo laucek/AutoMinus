@@ -5,11 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using autominus.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace autominus.Controllers
 {
     public class HomeController : Controller
     {
+        
+
         public IActionResult Index()
         {
             return View();
@@ -24,11 +28,42 @@ namespace autominus.Controllers
 
         public IActionResult Login()
         {
+            
             return View();
         }
 
         public IActionResult Register()
         {
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
+            
+            return View();
+        }
+
+        public IActionResult ProfileEdit()
+        {
+            
+            return View();
+        }
+
+        public IActionResult AddBalance()
+        {
+            
+            return View();
+        }
+
+        public IActionResult BalanceReport()
+        {
+            
+            return View();
+        }
+
+        public IActionResult Help()
+        {
+            
             return View();
         }
 

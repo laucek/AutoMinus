@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Paskyra";
+}
+
+
+<div class="form-group">
+    <div class="col-md-10">
+        <th>Balanso likutis:</th>
+        <br />
+        <input type="number" name="balance" readonly="readonly" value="$18.25" />
+        <form>
+            <button formaction="/Home/AddBalance">Pildyti</button>
+        </form>
+    </div>
+
+    <div class="col-md-10">
+        <th>E-Pašto adresas</th>
+        <br />
+        <input type="text" name="emailInput" readonly="readonly" value="abc@gmail.com" />
+    </div>
+
+    <div class="col-md-10">
+        <th>Vardas</th>
+        <br />
+        <input type="text" name="nameInput" readonly="readonly" value="Vardas" />
+    </div>
+
+    <div class="col-md-10">
+        <br />
+
+        <form>
+            <button formaction="/Home/ProfileEdit">Redaguoti</button>
+        </form>
+
+    </div>
+</div>
+<br />
