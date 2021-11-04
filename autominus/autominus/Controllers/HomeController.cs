@@ -64,6 +64,20 @@ namespace autominus.Controllers
             
             return View();
         }
+        public IActionResult AdListView()
+        {
+            return View();
+        }
+
+        public IActionResult AdView()
+        {
+            return View();
+        }
+
+        public IActionResult AdEditView()
+        {
+            return View();
+        }
 
         public IActionResult BalanceReport()
         {
