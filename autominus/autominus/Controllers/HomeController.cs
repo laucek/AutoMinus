@@ -79,6 +79,11 @@ namespace autominus.Controllers
             return View();
         }
 
+        public IActionResult AdCreateView()
+        {
+            return View();
+        }
+
         public IActionResult BalanceReport()
         {
             
