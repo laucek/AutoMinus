@@ -67,7 +67,20 @@ namespace autominus.Controllers
             return View();
         }
 
+        public IActionResult VartotojuSarasoLangas()
+        {
+            return View();
+        }
 
+        public IActionResult PasirinktoVartotojoLangas()
+        {
+            return View();
+        }
+        public IActionResult Salinti()
+        {
+            ViewData["Message"] = "Šalinimas";
+            return View();
+        }
 
         public IActionResult Contact()
         {
@@ -77,6 +90,11 @@ namespace autominus.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Strawpoll()
         {
             return View();
         }
