@@ -31,6 +31,7 @@ namespace autominus2.Models
         public string PhoneNumber { get; set; }
         public string Gearbox { get; set; }
         public string BodyType { get; set; }
+        public int FkId { get; set; }
 
         public Advertisement()
         {
