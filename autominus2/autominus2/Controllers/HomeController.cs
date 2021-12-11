@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using autominus2.Utils;
 
 namespace autominus.Controllers
 {
@@ -25,7 +26,10 @@ namespace autominus.Controllers
 
         public ActionResult Login()
         {
+            if (OurSession.InRegistration)
+            {
 
+            }
             return View();
         }
         public ActionResult HelpEmail()
@@ -35,7 +39,6 @@ namespace autominus.Controllers
         }
         public ActionResult HelpLive()
         {
-
             return View();
         }
 
