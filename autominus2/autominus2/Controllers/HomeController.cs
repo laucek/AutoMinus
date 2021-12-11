@@ -5,12 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using autominus2.Utils;
+using autominus2.Models;
+using MySql.Data.MySqlClient;
 
 namespace autominus.Controllers
 {
     public class HomeController : Controller
     {
-        
+
+        public ActionResult Logout()
+        {
+            return View();
+        }
 
         public ActionResult Index()
         {
@@ -24,10 +30,40 @@ namespace autominus.Controllers
             return View();
         }
 
+        public ActionResult ProcLogin()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             if (OurSession.InRegistration)
             {
+                string passw = String.Format("{0}", Request.Form["registerPasswordInput"]);
+                string passwConfirm = String.Format("{0}", Request.Form["registerPasswordConfirmInput"]);
+                string name = String.Format("{0}", Request.Form["registerNameInput"]);
+                string lastName = String.Format("{0}", Request.Form["registerLastNameInput"]);
+                string userName = String.Format("{0}", Request.Form["registerUserNameInput"]);
+                string city = String.Format("{0}", Request.Form["registerCityInput"]);
+                DateTime date = DateTime.Now;
+                bool falseDate = false;
+                try
+                {
+                    date = DateTime.Parse(Request.Form["registerBirthDateInput"]);
+                }
+                catch { falseDate = true; }
+                
+                string phone = String.Format("{0}", Request.Form["registerPhoneNumberInput"]);
+                string email = String.Format("{0}", Request.Form["registerEmailInput"]);
+
+                if(passw.Length != 0 && passwConfirm.Length != 0 && name.Length != 0 &&
+                    lastName.Length != 0 && userName.Length != 0 && city.Length != 0 && !falseDate)
+                {
+                    User usr = new User(name, lastName, userName, passw, email, city, date, 0, 0, phone, 0);
+                    UserRepo.InsertUser(usr);
+                }
+                OurSession.InRegistration = false;
+
 
             }
             return View();
