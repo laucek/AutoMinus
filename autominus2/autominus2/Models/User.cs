@@ -16,12 +16,12 @@ namespace autominus2.Models
         public string City { get; set; }
         public DateTime BirthDate { get; set; }
         public int RoleLevel { get; set; }
-        public int Balance { get; set; }
+        public double Balance { get; set; }
         public string PhoneNumber { get; set; }
         public int Restrictions { get; set; }
 
         public User(string name, string lastName, string userName, string password,
-            string email, string city, DateTime birthDate, int roleLevel, int balance,
+            string email, string city, DateTime birthDate, int roleLevel, double balance,
             string phoneNumber, int restrictions, int id = -1)
         {
             Id = id;
