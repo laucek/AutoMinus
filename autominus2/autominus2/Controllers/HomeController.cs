@@ -4,13 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using autominus2.Models;
 using autominus2.Utils;
 
 namespace autominus.Controllers
 {
     public class HomeController : Controller
     {
-        
+
+        ModeratorRepo moderatorRepo = new ModeratorRepo();
 
         public ActionResult Index()
         {
@@ -131,9 +133,34 @@ namespace autominus.Controllers
 
         public ActionResult VartotojuSarasoLangas()
         {
-            return View();
+            return View(moderatorRepo.getUsers());
+        }
+        // GET: Klientas/Edit/5
+        [HttpGet]
+        public ActionResult PasirinktoVartotojoLangas(int id)
+        {
+            return View(moderatorRepo.getUser(id));
         }
 
+        // POST: Klientas/Edit/5
+        [HttpPost]
+        public ActionResult PasirinktoVartotojoLangas(int id, User collection)
+            {
+            try
+            {
+                // Atnaujina kliento informacija
+                if (ModelState.IsValid)
+                {
+                    moderatorRepo.updateUser(collection);
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(collection);
+            }
+        }
         public ActionResult PasirinktoVartotojoLangas()
         {
             return View();
