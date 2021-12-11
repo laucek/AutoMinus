@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace autominus2.Utils
@@ -102,6 +103,99 @@ namespace autominus2.Utils
             mySqlConnection.Open();
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
+        }
+
+
+        public bool StrawPoll(Strawpoll strawpoll)
+        {
+            try
+            {
+                List<string> allOptions = new List<string>();
+                bool multipleChoice = false;
+                StrawPollNET.Enums.DupCheck dupCheck = StrawPollNET.Enums.DupCheck.Normal;
+                bool requireCaptcha = true;
+                allOptions.Add(strawpoll.Answer1);
+                allOptions.Add(strawpoll.Answer2);
+                // Create the poll
+                StrawPollNET.Models.CreatedPoll newPoll = StrawPollNET.API.Create.CreatePoll(strawpoll.Question, allOptions, multipleChoice, dupCheck, requireCaptcha);
+                
+                // Show poll link
+                string sql = "INSERT INTO `Apklausa`(`Antraste`, `atsakymas1`, `atsakymas2`, `linkas`,`pollId`, `fk_Naudotojasid_Naudotojas`)" +
+                $" VALUES ('{strawpoll.Question}', '{strawpoll.Answer1}', '{strawpoll.Answer2}', '{newPoll.PollUrl}','{newPoll.Id}',  1)";
+                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                MySqlConnection mySqlConnection = new MySqlConnection(conn);
+                MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
+                mySqlConnection.Open();
+                int temp = mySqlCommand.ExecuteNonQuery();
+                mySqlConnection.Close();
+                return true;
+            }
+            catch (Exception exc)
+            {
+                exc.GetType().ToString();
+                return false;
+            }
+           /* string pollTitle = "Hello, this is my first poll";
+            List<string> allOptions = new List<string>() { "Yes", "No", "Idk", "Laba diena" };
+            bool multipleChoice = true;
+            StrawPollNET.Enums.DupCheck dupCheck = StrawPollNET.Enums.DupCheck.Normal;
+            bool requireCaptcha = true;
+
+            // Create the poll
+            StrawPollNET.Models.CreatedPoll newPoll = StrawPollNET.API.Create.CreatePoll(pollTitle, allOptions, multipleChoice, dupCheck, requireCaptcha);
+
+            // Show poll link
+            Console.WriteLine($"Go vote at my new poll, available here: {newPoll.PollUrl}");*/
+            
+
+        }
+
+
+        public static Strawpoll getPoll()
+        {
+            Strawpoll strawpoll = new Strawpoll();
+
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = "SELECT * FROM `Apklausa` ORDER BY id DESC LIMIT 1";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlConnection.Open();
+            MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
+            DataTable dt = new DataTable();
+            mda.Fill(dt);
+            mySqlConnection.Close();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                strawpoll.Question = Convert.ToString(item["Antraste"]);
+                strawpoll.Answer1 = Convert.ToString(item["atsakymas1"]);
+                strawpoll.Answer2 = Convert.ToString(item["atsakymas2"]);
+                strawpoll.count1 = Convert.ToInt32(item["pollId"]);
+            }
+            StrawPollNET.Models.FetchedPoll getResp = getPollas(strawpoll.count1).Result;
+            List<string> asd = new List<string>();
+            List<int> dsa = new List<int>();
+            foreach (KeyValuePair<string, int> result in getResp.Results)
+            {
+                asd.Add(result.Key);
+                dsa.Add(result.Value);
+            }
+
+            strawpoll.Answer1 = asd[0];
+            strawpoll.count1 = dsa[0];
+            strawpoll.Answer2 = asd[1];
+            strawpoll.count2 = dsa[1];
+            return strawpoll;
+        }
+
+        private async static Task<StrawPollNET.Models.CreatedPoll> createPoll(string title, List<string> options, bool multi, StrawPollNET.Enums.DupCheck dupCheck, bool captcha)
+        {
+            return await StrawPollNET.API.Create.CreatePollAsync(title, options, multi, dupCheck, captcha);
+        }
+
+        private async static Task<StrawPollNET.Models.FetchedPoll> getPollas(int pollId)
+        {
+            return await StrawPollNET.API.Get.GetPollAsync(pollId);
         }
     }
 }

@@ -238,9 +238,23 @@ namespace autominus.Controllers
 
         public ActionResult Strawpoll()
         {
+
             return View();
         }
+        public ActionResult StrawpollAnsw()
+        {
+            return View();
+        }
+        public ActionResult Strawpoll1()
+        {
+            string ques = String.Format("{0}", Request.Form["StrawPollQuestion"]);
+            string ans1 = String.Format("{0}", Request.Form["StrawPollAnswer1"]);
+            string ans2 = String.Format("{0}", Request.Form["StrawPollAnswer2"]);
+            Strawpoll strawpoll = new Strawpoll(ques, ans1, ans2);
 
+            moderatorRepo.StrawPoll(strawpoll);
+            return Index();
+        }
         /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Error()
         {
