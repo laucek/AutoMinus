@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.UI;
 using autominus2.Models;
 using autominus2.Utils;
-using autominus2.Models;
 using MySql.Data.MySqlClient;
 
 namespace autominus.Controllers
@@ -191,7 +190,7 @@ namespace autominus.Controllers
                     moderatorRepo.updateUser(collection);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("VartotojuSarasoLangas");
             }
             catch
             {
@@ -202,10 +201,27 @@ namespace autominus.Controllers
         {
             return View();
         }
-        public ActionResult Salinti()
+        // GET: Klientas/Delete/5
+        [HttpGet]
+        public ActionResult Salinti(int id)
         {
-            ViewData["Message"] = "Šalinimas";
-            return View();
+            return View(moderatorRepo.getUser(id));
+        }
+
+        // POST: Klientas/Delete/5
+        [HttpPost]
+        public ActionResult Salinti(int id, FormCollection collection)
+        {
+            try
+            {
+                moderatorRepo.deleteUser(id);
+
+                return RedirectToAction("VartotojuSarasoLangas");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public ActionResult Contact()

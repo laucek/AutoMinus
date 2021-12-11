@@ -78,16 +78,30 @@ namespace autominus2.Utils
         {
                 string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
-                string sqlquery = @"UPDATE Naudotojas a SET a.vardas=?var, a.el_pastas=?el, a.galimybes=?gal WHERE a.id=?idas";
+                string sqlquery = @"UPDATE Naudotojas a SET a.vardas=?var, a.el_pastas=?el, a.tipas=?tip, a.galimybes=?gal WHERE a.id=?idas";
                 MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
                 mySqlCommand.Parameters.Add("?idas", MySqlDbType.Int32).Value = user.Id;
                 mySqlCommand.Parameters.Add("?var", MySqlDbType.VarChar).Value = user.Name;
                 mySqlCommand.Parameters.Add("?el", MySqlDbType.VarChar).Value = user.Email;
+                mySqlCommand.Parameters.Add("?tip", MySqlDbType.Int32).Value = user.RoleLevel;
                 mySqlCommand.Parameters.Add("?gal", MySqlDbType.Int32).Value = user.Restrictions;
                 mySqlConnection.Open();
                 mySqlCommand.ExecuteNonQuery();
                 mySqlConnection.Close();
                 return true;
+        }
+
+
+        public void deleteUser(int id)
+        {
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = @"DELETE FROM Naudotojas where id=?id";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlCommand.Parameters.Add("?id", MySqlDbType.VarChar).Value = id;
+            mySqlConnection.Open();
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
         }
     }
 }

@@ -27,12 +27,14 @@
                     else
                     {
                         <li>@Html.ActionLink("Profilis", "Profile", "Home")</li>
+                        if (autominus2.Utils.OurSession.LoggedInUser.RoleLevel == 3 || autominus2.Utils.OurSession.LoggedInUser.RoleLevel == 4)
+                        {
+                            <li>@Html.ActionLink("Vartotojų sąrašas", "VartotojuSarasoLangas", "Home")</li>
+                            <li>@Html.ActionLink("StrawPoll", "Strawpoll", "Home")</li>
+                        }
                     }
                     <li>@Html.ActionLink("Forumas", "Forum", "Home")</li>
                     <li>@Html.ActionLink("Pagalbos prašymas", "Help", "Home")</li>
-                    <li>@Html.ActionLink("Vartotojų sąrašas", "VartotojuSarasoLangas", "Home")</li>
-                    <li>@Html.ActionLink("StrawPoll", "Strawpoll", "Home")</li>
-                    <li>@Html.ActionLink("Vartotojų sąrašas", "Strawpoll", "Home")</li>
 
                     @if (autominus2.Utils.OurSession.LoggedInUser != null)
                     {
