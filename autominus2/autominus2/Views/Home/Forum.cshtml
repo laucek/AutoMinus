@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Automobiliu skelbimai";
+}
+
+<form>
+    <div class="ForumMainContainer" style="background-color:lightseagreen;width:100%;height:50px">
+
+        Čia galite užduoti klausimą.
+        <button formaction="/Home/NewForumQuestion">Rašyti naują klausimą</button>
+    </div>
+    <div class="ForumQuestionMain" style="border: solid 2px; background-color:lightseagreen">
+        <p style=" font-size:20px;font-weight:bold">
+            Įrašas Nr.1
+        </p>
+        <br>
+        <p style=" font-size:16px;font-weight:bold">
+            Ar galima pilti benzina į dyzelino baką?
+        </p>
+        <br>
+        <button formaction="/Home/ForumQuestion">Žiūrėti temą</button>
+        <button formaction="/Home/EditQuestion">Redaguoti temą</button>
+        <button formaction="/Home/ForumQuestionArchive">Archyvuoti</button>
+    </div>
+
+</form>
+
