@@ -7,6 +7,7 @@ namespace autominus2.Models
 {
     public class Advertisement
     {
+        public int Id { get; set; }
         public DateTime AdCreationDate { get; set; }
         public string FuelType { get; set; }
         public int Mileage { get; set; }
@@ -31,6 +32,10 @@ namespace autominus2.Models
         public string Gearbox { get; set; }
         public string BodyType { get; set; }
 
+        public Advertisement()
+        {
+
+        }
         public Advertisement(DateTime adCreationDate, string fuelType, int mileage, string vin, string engineCapacity,
             string model, string make, int doorCount, DateTime modelYear, float price, int drivetrain, string power, string damage,
             string color, int seatCount, string wheelPosition, string firstRegistrationCountry, string co2Emissions, string city,

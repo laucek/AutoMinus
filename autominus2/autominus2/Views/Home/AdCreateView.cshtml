@@ -4,142 +4,143 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
+<div class="form-group text-center">
+    <form method="POST" action="AdCreate">
+        <div class="col-md-20">
+            <th>Marke</th>
+            <br />
+            <input type="text" name="AdCreateMarkeInput" />
+        </div>
 
-<div class="col-md-20">
-    <th>Marke</th>
-    <br />
-    <input type="text" name="AdCreateMarkeInput" />
+        <div class="col-md-20">
+            <th>Modelis</th>
+            <br />
+            <input type="text" name="AdCreateModelisInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Pagaminimo data</th>
+            <br />
+            <input type="date" name="AdCreateDataInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Kėbulo tipas</th>
+            <br />
+            <input type="text" name="AdCreateKebulasInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Kuro tipas</th>
+            <br />
+            <input type="text" name="AdCreateKurasInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Pavarų dėžė</th>
+            <br />
+            <input type="text" name="AdCreateDezeInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Durų skaičius</th>
+            <br />
+            <input type="number" name="AdCreateDurysInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Defektai</th>
+            <br />
+            <input type="text" name="AdCreateDefektaiInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Vairo padėtis</th>
+            <br />
+            <input type="text" name="AdCreateVairasInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Spalva</th>
+            <br />
+            <input type="text" name="AdCreateSpalvaInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Rida</th>
+            <br />
+            <input type="number" name="AdCreateRidaInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Darbinis tūris</th>
+            <br />
+            <input type="text" name="AdCreateTurisInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Galia</th>
+            <br />
+            <input type="text" name="AdCreateGaliaInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Kėbulo numeris</th>
+            <br />
+            <input type="text" name="AdCreateVinInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Kaina</th>
+            <br />
+            <input type="number" name="AdCreateKainaInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Varantieji ratai</th>
+            <br />
+            <input type="number" name="AdCreateRataiInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Sėdimų vietų skaičius</th>
+            <br />
+            <input type="number" name="AdCreateVietosInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Pirmosios registracijos šalis</th>
+            <br />
+            <input type="text" name="AdCreateRegistracijaInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>CO2 emisija</th>
+            <br />
+            <input type="text" name="AdCreateCo2Input" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Miestas</th>
+            <br />
+            <input type="text" name="AdCreateMiestasInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Šalis</th>
+            <br />
+            <input type="text" name="AdCreateSalisInput" />
+        </div>
+
+        <div class="col-md-20">
+            <th>Telefono numeris</th>
+            <br />
+            <input type="text" name="AdCreateTelefonasInput" />
+        </div>
+
+        <div class="col-md-10">
+            <br />
+                <button>Patvirtinti</button>
+        </div>
+    </form>
 </div>
-
-<div class="col-md-20">
-    <th>Modelis</th>
-    <br />
-    <input type="text" name="AdCreateModelisInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Pagaminimo data</th>
-    <br />
-    <input type="date" name="AdCreateDataInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Kėbulo tipas</th>
-    <br />
-    <input type="text" name="AdCreateKebulasInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Kuro tipas</th>
-    <br />
-    <input type="text" name="AdCreateKurasInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Pavarų dėžė</th>
-    <br />
-    <input type="text" name="AdCreateDezeInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Durų skaičius</th>
-    <br />
-    <input type="number" name="AdCreateDurysInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Defektai</th>
-    <br />
-    <input type="text" name="AdCreateDefektaiInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Vairo padėtis</th>
-    <br />
-    <input type="text" name="AdCreateVairasInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Spalva</th>
-    <br />
-    <input type="text" name="AdCreateSpalvaInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Rida</th>
-    <br />
-    <input type="number" name="AdCreateRidaInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Darbinis tūris</th>
-    <br />
-    <input type="text" name="AdCreateTurisInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Galia</th>
-    <br />
-    <input type="text" name="AdCreateGaliaInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Kėbulo numeris</th>
-    <br />
-    <input type="text" name="AdCreateVinInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Kaina</th>
-    <br />
-    <input type="number" name="AdCreateKainaInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Varantieji ratai</th>
-    <br />
-    <input type="number" name="AdCreateRataiInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Sėdimų vietų skaičius</th>
-    <br />
-    <input type="number" name="AdCreateVietosInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Pirmosios registracijos šalis</th>
-    <br />
-    <input type="text" name="AdCreateRegistracijaInput" />
-</div>
-
-<div class="col-md-20">
-    <th>CO2 emisija</th>
-    <br />
-    <input type="text" name="AdCreateCo2Input" />
-</div>
-
-<div class="col-md-20">
-    <th>Miestas</th>
-    <br />
-    <input type="text" name="AdCreateMiestasInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Šalis</th>
-    <br />
-    <input type="text" name="AdCreateSalisInput" />
-</div>
-
-<div class="col-md-20">
-    <th>Telefono numeris</th>
-    <br />
-    <input type="text" name="AdCreateTelefonasInput" />
-</div>
-
-<form>
-    <div class="col-md-20">
-        <br />
-        <button formaction="/Home">Patvirtinti</button>
-    </div>
-</form>

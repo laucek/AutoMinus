@@ -1,43 +1,110 @@
-﻿@{
-    ViewData["Title"] = "Skelbimai";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@*@{
+        ViewData["Title"] = "Skelbimai";
+    }
+    <h2>@ViewData["Title"]</h2>
+    <h3>@ViewData["Message"]</h3>
 
-<a href="/Home/AdView"
-   class="announcement-item">
+    <a href="/Home/AdView"
+       class="announcement-item">
 
-    <div class="announcement-body">
-        <div class="announcement-title">
-            BMW 320, sedanas
-        </div>
+        <div class="announcement-body">
+            <div class="announcement-title">
+                BMW 320, sedanas
+            </div>
 
-        <div class="announcement-pricing-info">
-            <strong>
-                11 499 &euro;
+            <div class="announcement-pricing-info">
+                <strong>
+                    11 499 &euro;
 
-            </strong>
-        </div>
+                </strong>
+            </div>
 
-        <div class="announcement-parameters ">
-            <div class="bottom-aligner">
-                <span title="Pagaminimo data">
-                    2012
-                </span>
-                <span title="Kuro tipas">
-                    Dyzelinas
-                </span>
-                <span title="Pavarų dėžė">
-                    Automatinė
-                </span>
-                <span title="Rida">
-                    230 000 km
-                </span>
-                <span title="Miestas">
-                    Vilnius
-                </span>
+            <div class="announcement-parameters ">
+                <div class="bottom-aligner">
+                    <span title="Pagaminimo data">
+                        2012
+                    </span>
+                    <span title="Kuro tipas">
+                        Dyzelinas
+                    </span>
+                    <span title="Pavarų dėžė">
+                        Automatinė
+                    </span>
+                    <span title="Rida">
+                        230 000 km
+                    </span>
+                    <span title="Miestas">
+                        Vilnius
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-</a>
+    </a>*@
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<autominus2.Models.Advertisement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Visi skelbimai</h2>
+
+<table class="table table-striped datatable">
+    <thead>
+        <tr style="background-color: lightblue">
+            <th>
+                @Html.DisplayNameFor(model => model.Make)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EngineCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mileage)
+            </th>
+            <th style="width: 18%"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BodyType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mileage)
+                </td>
+                <td>
+                    @Html.ActionLink("Peržiūrėti", "AdView", new { id = item.Id }, new { @class = "btn btn-primary action" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

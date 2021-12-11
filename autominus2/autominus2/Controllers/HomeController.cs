@@ -12,7 +12,7 @@ namespace autominus.Controllers
 {
     public class HomeController : Controller
     {
-
+        CarsRepo carsRepo = new CarsRepo();
         public ActionResult Logout()
         {
             return View();
@@ -127,7 +127,7 @@ namespace autominus.Controllers
         }
         public ActionResult AdListView()
         {
-            return View();
+            return View(carsRepo.getAdvertisements());
         }
 
         public ActionResult AdView()
@@ -143,6 +143,53 @@ namespace autominus.Controllers
         public ActionResult AdCreateView()
         {
             return View();
+        }
+
+        public ActionResult AdCreate()
+        {
+            DateTime adCreationDate = DateTime.Now;
+            string make = String.Format("{0}", Request.Form["AdCreateMarkeInput"]);
+            string model = String.Format("{0}", Request.Form["AdCreateModelisInput"]);
+            DateTime modelYear = DateTime.Now;//String.Format("{0}", Request.Form["AdCreateDataInput"]);
+            bool falseDate = false;
+            try
+            {
+                modelYear = DateTime.Parse(Request.Form["AdCreateDataInput"]);
+            }
+            catch { falseDate = true; }
+            string bodyType = String.Format("{0}", Request.Form["AdCreateKebulasInput"]);
+            string fuelType = String.Format("{0}", Request.Form["AdCreateKurasInput"]);
+            string gearbox = String.Format("{0}", Request.Form["AdCreateDezeInput"]);
+            int doorCount = Int32.Parse(Request.Form["AdCreateDurysInput"]);
+            string damage = String.Format("{0}", Request.Form["AdCreateDefektaiInput"]);
+            string wheelPosition = String.Format("{0}", Request.Form["AdCreateVairasInput"]);
+            string color = String.Format("{0}", Request.Form["AdCreateSpalvaInput"]);
+            int mileage = Int32.Parse(Request.Form["AdCreateRidaInput"]);
+            string engineCapacity = String.Format("{0}", Request.Form["AdCreateTurisInput"]);
+            string power = String.Format("{0}", Request.Form["AdCreateGaliaInput"]);
+            string vin = String.Format("{0}", Request.Form["AdCreateVinInput"]);
+            float price = Single.Parse(Request.Form["AdCreateKainaInput"]);
+            int drivetrain = Int32.Parse(Request.Form["AdCreateRataiInput"]);
+            int seatCount = Int32.Parse(Request.Form["AdCreateVietosInput"]);
+            string firstRegistrationCountry = String.Format("{0}", Request.Form["AdCreateRegistracijaInput"]);
+            string co2Emissions = String.Format("{0}", Request.Form["AdCreateCo2Input"]);
+            string city = String.Format("{0}", Request.Form["AdCreateMiestasInput"]);
+            string country = String.Format("{0}", Request.Form["AdCreateSalisInput"]);
+            string phoneNumber = String.Format("{0}", Request.Form["AdCreateTelefonasInput"]);
+
+
+            if (make.Length != 0 && model.Length != 0 && bodyType.Length != 0 &&
+                fuelType.Length != 0 && gearbox.Length != 0 && damage.Length != 0 &&
+                wheelPosition.Length != 0 && color.Length != 0 && engineCapacity.Length != 0 &&
+                power.Length != 0 && vin.Length != 0 && firstRegistrationCountry.Length != 0 &&
+                co2Emissions.Length != 0 && city.Length != 0 && country.Length != 0 && phoneNumber.Length != 0 && !falseDate)
+            {
+                Advertisement ad = new Advertisement(adCreationDate, fuelType, mileage, vin, engineCapacity, model, make,
+                    doorCount, modelYear, price, drivetrain, power, damage, color, seatCount, wheelPosition,
+                    firstRegistrationCountry, co2Emissions, city, country, phoneNumber, gearbox, bodyType);
+                CarsRepo.InsertAdvertisement(ad);
+            }
+            return Index();
         }
 
         public ActionResult BalanceReport()
