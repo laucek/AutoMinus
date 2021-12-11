@@ -27,6 +27,7 @@ namespace autominus2.Models
         [DisplayName("Balansas")]
         public float Balance { get; set; }
         [DisplayName("Telefono numeris")]
+        public double Balance { get; set; }
         public string PhoneNumber { get; set; }
         [DisplayName("Galimybės")]
         public int Restrictions { get; set; }
@@ -36,7 +37,7 @@ namespace autominus2.Models
         }
 
         public User(string name, string lastName, string userName, string password,
-            string email, string city, DateTime birthDate, int roleLevel, float balance,
+            string email, string city, DateTime birthDate, int roleLevel, double balance,
             string phoneNumber, int restrictions, int id = -1)
         {
             Id = id;

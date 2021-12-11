@@ -236,6 +236,8 @@
     <Content Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
+    <Content Include="Views\Home\ProcLogin.cshtml" />
+    <Content Include="Views\Home\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

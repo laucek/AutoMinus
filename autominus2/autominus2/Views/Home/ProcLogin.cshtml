@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Procedura";
+    string passw = String.Format("{0}", Request.Form["loginPasswordInput"]);
+    string email = String.Format("{0}", Request.Form["loginEmailInput"]);
+    autominus2.Models.User user = autominus2.Utils.UserRepo.SelectUserByEmail(email);
+    if (user is null)
+    {
+        Response.Redirect("Login");
+    }
+    else
+    {
+        autominus2.Utils.OurSession.LoggedInUser = user;
+        Response.Redirect("Index");
+    }
+
+}
