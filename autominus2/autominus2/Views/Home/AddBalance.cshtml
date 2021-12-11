@@ -4,18 +4,19 @@
 
 
 <div class="form-group text-center">
-    <div class="col-md-10">
-        <th>Įrašykite sumą</th>
-        <br />
-        <input type="number" name="balanceInput"  />
-    </div>
+    <form action="ProcPayment" method="POST">
+        <div class="col-md-10">
+            <th>Įrašykite sumą</th>
+            <br />
+            <input type="number" name="balanceInput" min=5 />
+        </div>
 
-    <div class="col-md-10">
-        <br />
+        <div class="col-md-10">
+            <br />
 
-        <form>
-            <button formaction="/Home/BalanceReport">Išsaugoti</button>
-        </form>
+
+            <button>Pildyti</button>
+    </form>
 
     </div>
 </div>

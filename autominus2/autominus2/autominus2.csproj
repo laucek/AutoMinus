@@ -163,10 +163,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CarsRepo.cs" />
     <Compile Include="Utils\ForumRepo.cs" />
+    <Compile Include="Utils\Languages\English.cs" />
+    <Compile Include="Utils\Languages\Language.cs" />
+    <Compile Include="Utils\Languages\Lithuanian.cs" />
     <Compile Include="Utils\ModeratorRepo.cs" />
     <Compile Include="Utils\OurSession.cs" />
     <Compile Include="Utils\UserRepo.cs" />
@@ -238,6 +242,10 @@
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\Home\ProcLogin.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
+    <Content Include="Views\Home\ProcProfileEdit.cshtml" />
+    <Content Include="Views\Home\ProcHelpRequest.cshtml" />
+    <Content Include="Views\Home\ProcCloseQuestion.cshtml" />
+    <Content Include="Views\Home\ProcPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

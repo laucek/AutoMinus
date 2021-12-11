@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Pagalbos suteikimas";
+    string question = autominus2.Utils.OurSession.helpRequestString;
 }
 
 
@@ -7,20 +8,34 @@
     <div class="col-md-10">
         <th>Jūsų Klausimas:</th>
         <br />
-        <input type="text" name="KAIP SITE'A KURT WTF" />
+        <textarea name="helpReviewQuestion" cols="40" rows="5" readonly="readonly">@question</textarea>
+
     </div>
 
     <div class="col-md-10">
         <th>Pokalbis su moderatorium:</th>
         <br />
-        <input type="text" style="height:300px;width:300px" name="Question" />
+        <textarea name="helpReviewTalkSpace" cols="40" rows="15"></textarea>
     </div>
+
+    <form action="" method="POST">
+        <div class="col-md-10">
+            <th>Parašykite žinutę:</th>
+            <br />
+            <textarea name="helpReviewTalkMsg" cols="40" rows="3"></textarea>
+            <br/>
+            <button>Siųsti</button>
+        </div>
+
+
+        
+    </form>
 
     <div class="col-md-10">
         <br />
 
-        <form>
-            <button formaction="/Home/index">Uždaryti klausimą</button>
+        <form action="ProcCloseQuestion" method="POST">
+            <button>Uždaryti klausimą</button>
         </form>
 
     </div>

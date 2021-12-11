@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Procedura";
+    autominus2.Utils.UserRepo.CloseCurrentHelp();
+    autominus2.Utils.OurSession.helpRequestString = null;
+    autominus2.Utils.OurSession.helpIndex = null;
+
+    Response.Redirect("Index");
+
+}

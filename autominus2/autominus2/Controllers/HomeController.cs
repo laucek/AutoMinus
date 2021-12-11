@@ -13,6 +13,26 @@ namespace autominus.Controllers
     public class HomeController : Controller
     {
 
+        public ActionResult ProcCloseQuestion()
+        {
+            return View();
+        }
+
+        public ActionResult ProcPayment()
+        {            
+            return View();
+        }
+
+        public ActionResult ProcProfileEdit()
+        {
+            return View();
+        }
+
+        public ActionResult ProcHelpRequest()
+        {
+            return View();
+        }
+
         public ActionResult Logout()
         {
             return View();
@@ -26,7 +46,6 @@ namespace autominus.Controllers
         public ActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
@@ -153,7 +172,6 @@ namespace autominus.Controllers
 
         public ActionResult Help()
         {
-            
             return View();
         }
 

@@ -4,14 +4,10 @@
 
 
 <div class="form-group text-center">
-    <div class="col-md-10">
-        <th>Papildytas kiekis:</th>
-        <br />
-        <input type="number" readonly="readonly" name="balanceInput" value="$10.00" />
-    </div>
+   
+        <h1>Sąskaita sėkmingai papildyta</h1>
+    <h2>Papildytas kiekis: $@autominus2.Utils.OurSession.RecentPayment.Sum.ToString("N2")</h2>
 
-    <div class="col-md-10">
-        <br />
 
         <form>
             <button formaction="/Home/Index">Grįžti</button>

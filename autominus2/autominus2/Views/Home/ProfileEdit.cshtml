@@ -1,27 +1,66 @@
 ﻿@{
     ViewData["Title"] = "Redagavimas";
+    autominus2.Models.User user = autominus2.Utils.OurSession.EditObject;
 }
 
 
 <div class="form-group">
-    <div class="col-md-10">
-        <th>E-Pašto adresas</th>
-        <br />
-        <input type="text" name="emailInput" value="abc@gmail.com" />
-    </div>
+    <form method="POST" action="ProcProfileEdit">
 
-    <div class="col-md-10">
-        <th>Vardas</th>
-        <br />
-        <input type="text" name="nameInput" value="Vardas" />
-    </div>
+        <div class="col-md-10">
+            <th>Vardas</th>
+            <br />
+            <input type="text" name="editNameInput" value="@user.Name" required />
+        </div>
 
-    <div class="col-md-10">
-        <br />
+        <div class="col-md-10">
+            <th>Pavardė</th>
+            <br />
+            <input type="text" name="editLastNameInput" value="@user.LastName" required />
+        </div>
 
-        <form>
-            <button formaction="/Home/Profile">Išsaugoti</button>
-        </form>
+        <div class="col-md-10">
+            <th>Slapyvardis</th>
+            <br />
+            <input type="text" name="editUserNameInput" value="@user.UserName" required />
+        </div>
+
+        <div class="col-md-10">
+            <th>Miestas</th>
+            <br />
+            <input type="text" name="editCityInput" value="@user.City" required />
+        </div>
+
+        <div class="col-md-10">
+            <th>Telefono numeris</th>
+            <br />
+            <input type="text" name="editPhoneInput" value="@user.PhoneNumber" required />
+        </div>
+
+        <div class="col-md-10">
+            <th>E-Pašto adresas</th>
+            <br />
+            <input type="email" name="emailInput" value="@user.Email" required />
+        </div>
+
+
+        <div class="col-md-10">
+            <th>Senas slaptažodis</th>
+            <br />
+            <input type="password" name="editOldPassInput" required />
+        </div>
+
+        <div class="col-md-10">
+            <th>Naujas</th>
+            <br />
+            <input type="password" name="editNewPassinput" required />
+        </div>
+
+        <div class="col-md-10">
+            <br />
+
+            <button>Išsaugoti</button>
+    </form>
 
     </div>
 </div>
