@@ -1,47 +1,4 @@
-﻿@*@{
-        ViewData["Title"] = "BMW 320";
-    }
-    <h2>@ViewData["Title"]</h2>
-    <h3>@ViewData["Message"]</h3>
-
-    <div class="parameter-row ">
-        <div class="parameter-label">
-            Pagaminimo data    </div>
-        <div class="parameter-value ">
-            2012    </div>
-
-        </div>
-
-    <div class="parameter-row ">
-        <div class="parameter-label">
-            Rida    </div>
-        <div class="parameter-value ">
-            230 000 km    </div>
-
-        </div>
-
-    <div class="announcement-media-gallery">
-        <div class="thumbnail" data-index="0">
-                        <img src="https://img.autogidas.lt/10_1_7352965/bmw-320-2012-2016.jpg"/>
-                </div>
-    </div>
-
-    <form>
-        <div class="col-md-20">
-            <br />
-            <button formaction="/Home/AdListView">Atgal į sąrašą</button>
-        </div>
-        <div class="col-md-20">
-            <br />
-            <button formaction="/Home/AdEditView">Redaguoti skelbimą</button>
-        </div>
-        <div class="col-md-20">
-            <br />
-            <button formaction="/Home">Trinti skelbimą</button>
-        </div>
-    </form>*@
-
-@model autominus2.Models.Advertisement
+﻿@model autominus2.Models.Advertisement
 
 @{
     ViewBag.Title = Model.Make + " " + Model.Model;
@@ -215,18 +172,6 @@
             {
                 @Html.ActionLink("Redaguoti", "AdEditView", new { id = Model.Id }, new { @class = "btn btn-primary action" })
                 @Html.ActionLink("Šalinti", "AdDelete", new { id = Model.Id }, new { @class = "btn btn-danger action" })
-                @*@Html.ActionLink("Šalinti", "AdDelete", new { id = Model.Id }, new { @class = "btn btn-danger action" })*@
-                <!--<div class="form-group">
-                    <div class="col-md-offset-2 col-md-10" >
-                        <input type="submit" value="Redaguoti" class="btn btn-success" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Šalinti" class="btn btn-danger" />-->
-                        @*@Html.ActionLink("Šalinti", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger action" })*@
-                    <!--</div>
-                </div>-->
             }
             else
             {

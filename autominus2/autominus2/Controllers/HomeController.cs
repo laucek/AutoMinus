@@ -266,7 +266,6 @@ namespace autominus.Controllers
             string country = String.Format("{0}", Request.Form["AdCreateSalisInput"]);
             string phoneNumber = String.Format("{0}", Request.Form["AdCreateTelefonasInput"]);
 
-
             if (make.Length != 0 && model.Length != 0 && bodyType.Length != 0 &&
                 fuelType.Length != 0 && gearbox.Length != 0 && damage.Length != 0 &&
                 wheelPosition.Length != 0 && color.Length != 0 && engineCapacity.Length != 0 &&
