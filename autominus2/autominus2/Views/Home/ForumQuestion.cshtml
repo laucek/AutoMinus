@@ -36,7 +36,7 @@
             </tr>
             if (autominus2.Utils.OurSession.LoggedInUser != null)
             {
-                if (autominus2.Utils.OurSession.LoggedInUser.Restrictions <= 2)
+                if (autominus2.Utils.OurSession.LoggedInUser.Id == item.temos_autorius_id)
                 {
                     @Html.ActionLink("Redaguoti", "EditQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
                 }
