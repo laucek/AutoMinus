@@ -172,6 +172,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ForumQuestionAnswer.cs" />
+    <Compile Include="Models\ForumQuestionListModel.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Strawpoll.cs" />
     <Compile Include="Models\Message.cs" />
@@ -264,6 +266,9 @@
     <Content Include="Views\Home\ProcCloseQuestion.cshtml" />
     <Content Include="Views\Home\ProcPayment.cshtml" />
     <Content Include="Views\Home\paymentFailure.cshtml" />
+    <Content Include="Views\Home\NewForumAnswer.cshtml" />
+    <Content Include="Views\Home\ForumArchives.cshtml" />
+    <Content Include="Views\Home\ForumQuestionArchives.cshtml" />
     <Content Include="Views\Home\HelpClose.cshtml" />
     <Content Include="Views\Home\HelpAnswer.cshtml" />
     <Content Include="Views\Home\HelpReviewMod.cshtml" />

@@ -160,30 +160,144 @@ namespace autominus.Controllers
             return View();
         }
         //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        ForumRepo questionrep = new ForumRepo();
         public ActionResult Forum()
         {
-            return View();
+
+            return View(questionrep.GetQuestions());
         }
+
+
         public ActionResult NewForumQuestion()
         {
             return View();
         }
-        public ActionResult ForumQuestion()
+        [HttpPost]
+        public ActionResult NewForumQuestion(ForumQuestionListModel collect)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.addQuestion(collect);
+                }
+                return RedirectToAction("Forum");
+            }
+            catch
+            {
+                return View(collect);
+
+            }
+        }
+        [HttpGet]
+        public ActionResult ForumQuestion(int id)
+        {
+            return View(questionrep.GetQuestionlist(id));
+        }
+        [HttpGet]
+        public ActionResult EditQuestion(int id)
+        {
+            return View(questionrep.GetQuestion(id));
+        }
+        [HttpPost]
+        public ActionResult EditQuestion(int id, ForumQuestionListModel collect)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.UpdateQuestion(id, collect);
+                }
+                return RedirectToAction("Forum");
+            }
+            catch
+            {
+                return View(collect);
+            }
+        }
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+
+        //public ActionResult ForumQuestion(int id)
+        //{
+        //    return View(questionrep.GetQuestionsArchives(id));
+        //}
+
+        
+        [HttpGet]
+        public ActionResult ForumQuestionArchives(int id)
+        {
+            return View(questionrep.GetQuestionListArchives(id));
+        }
+
+        [HttpGet]
+        public ActionResult ForumQuestionArchive(int naud)
+        {
+            return View(questionrep.GetQuestion(naud));
+        }
+        [HttpGet]
+        public ActionResult ForumArchives()
+        {
+            return View(questionrep.GetQuestionsArchives());
+        }
+        [HttpPost]
+        public ActionResult ForumQuestionArchive(ForumQuestionListModel collect)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.addToArchives(collect);
+                   // questionrep.delete(collect);
+                }
+                return RedirectToAction("ForumArchives");
+            }
+            catch
+            {
+                return View(collect);
+
+            }
+        }
+
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        public ActionResult ForumQuestionAnswer(int id)
+        {
+            return View(questionrep.GetAnswers(id));
+        }
+
+        public ActionResult NewForumAnswer()
         {
             return View();
         }
-        public ActionResult EditQuestion()
+        [HttpPost]
+        public ActionResult NewForumAnswer(int id, int naud, ForumQuestionAnswer collect)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.addAnswer(id, naud,collect);
+                }
+                return RedirectToAction("Forum");
+            }
+            catch
+            {
+                return View(collect);
+
+            }
         }
-        public ActionResult ForumQuestionArchive()
-        {
-            return View();
-        }
-        public ActionResult ForumQuestionAnswer()
-        {
-            return View();
-        }
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
 
         public ActionResult ProfileEdit()
         {
