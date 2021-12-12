@@ -41,7 +41,25 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.BodyType, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.BodyType, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.BodyType, new { htmlAttributes = new { @class = "form-control" } })DropDownListFor*@
+                    @Html.DropDownListFor(model => model.BodyType, new SelectList(
+                                            new List<Object>{
+                                                new { value = "coupe" , text = "Coupe"  },
+                                                new { value = "hecbekas" , text = "Hečbekas" },
+                                                new { value = "kabrioletas" , text = "Kabrioletas"},
+                                                new { value = "komercinis" , text = "Komercinis"  },
+                                                new { value = "limuzinas" , text = "Limuzinas" },
+                                                new { value = "pikupas" , text = "Pikapas"},
+                                                new { value = "sedanas" , text = "Sedanas"  },
+                                                new { value = "universalas" , text = "Universalas" },
+                                                new { value = "vienaturis" , text = "Vienatūris"},
+                                                new { value = "couvisureigispe" , text = "Visureigis"  },
+                                                new { value = "kita" , text = "Kita"}
+                                            },
+                                            "value",
+                                            "text",
+                                            Model.BodyType
+                                    ))
                     @Html.ValidationMessageFor(model => model.BodyType, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -49,7 +67,22 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.FuelType, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.FuelType, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.FuelType, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.FuelType, new SelectList(
+                                            new List<Object>{
+                                                new { value = "dyzelinas" , text = "Dyzelinas"  },
+                                                new { value = "dyzelinas/elektra" , text = "Dyzelinas / elektra" },
+                                                new { value = "benzinas" , text = "Benzinas"},
+                                                new { value = "benzinas/dujos" , text = "Benzinas / dujos"  },
+                                                new { value = "benzinas/elektra" , text = "Benzinas / elektra" },
+                                                new { value = "elektra" , text = "Elektra"},
+                                                new { value = "bioetanolis" , text = "Bioetanolis"  },
+                                                new { value = "kita" , text = "Kita" }
+                                            },
+                                            "value",
+                                            "text",
+                                            Model.FuelType
+                                    ))
                     @Html.ValidationMessageFor(model => model.FuelType, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -57,7 +90,16 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Gearbox, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Gearbox, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.Gearbox, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.Gearbox, new SelectList(
+                                            new List<Object>{
+                                                new { value = "mechanine" , text = "Mechaninė"  },
+                                                new { value = "automatine" , text = "Automatinė" }
+                                            },
+                                            "value",
+                                            "text",
+                                            Model.Gearbox
+                                    ))
                     @Html.ValidationMessageFor(model => model.Gearbox, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -65,7 +107,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.DoorCount, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.DoorCount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.DoorCount, new { htmlAttributes = new { min = 0, @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.DoorCount, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -81,7 +123,16 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.WheelPosition, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.WheelPosition, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.WheelPosition, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.WheelPosition, new SelectList(
+                                            new List<Object>{
+                                                new { value = "kaire" , text = "Kairėje"  },
+                                                new { value = "desine" , text = "Dešinėje" }
+                                            },
+                                            "value",
+                                            "text",
+                                            Model.WheelPosition
+                                    ))
                     @Html.ValidationMessageFor(model => model.WheelPosition, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -97,7 +148,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Mileage, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Mileage, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Mileage, new { htmlAttributes = new { min = 0, @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Mileage, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -105,7 +156,20 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.EngineCapacity, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.EngineCapacity, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.EngineCapacity, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.EngineCapacity, new SelectList(
+                                            new List<Object>{
+                                                new { value = "1000" , text = "1000"  },
+                                                new { value = "1500" , text = "1500"  },
+                                                new { value = "2000" , text = "2000"  },
+                                                new { value = "2500" , text = "2500"  },
+                                                new { value = "3000" , text = "3000"  },
+                                                new { value = "3500" , text = "3500" }
+                                            },
+                                            "value",
+                                            "text",
+                                            Model.EngineCapacity
+                                    ))
                     @Html.ValidationMessageFor(model => model.EngineCapacity, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -129,7 +193,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { min = 0, @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -137,7 +201,17 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Drivetrain, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Drivetrain, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.Drivetrain, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.Drivetrain, new SelectList(
+                                            new List<Object>{
+                                                new { value = "1" , text = "Priekiniai"  },
+                                                new { value = "2" , text = "Galiniai"  },
+                                                new { value = "4" , text = "Visi"  }
+                                            },
+                                            "value",
+                                            "text",
+                                            Model.Drivetrain
+                                    ))
                     @Html.ValidationMessageFor(model => model.Drivetrain, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -145,7 +219,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.SeatCount, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.SeatCount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.SeatCount, new { htmlAttributes = new { min = 0, @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.SeatCount, "", new { @class = "text-danger" })
                 </div>
             </div>

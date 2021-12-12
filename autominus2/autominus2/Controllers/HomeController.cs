@@ -211,10 +211,18 @@ namespace autominus.Controllers
             return Index();
         }
 
-        public ActionResult AdDelete(int id)
+        public ActionResult AdDelete(int id, FormCollection collection)
         {
-            carsRepo.deleteAdvertisement(id);
-            return Index();
+            try
+            {
+                carsRepo.deleteAdvertisement(id);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public ActionResult BalanceReport()
