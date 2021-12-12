@@ -7,12 +7,83 @@ using System.Web.UI;
 using autominus2.Utils;
 using autominus2.Models;
 using MySql.Data.MySqlClient;
+using PayPal.Api;
 
 namespace autominus.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ActionResult ProcCloseQuestion()
+        {
+            return View();
+        }
+
+        public ActionResult ProcPaymentt()
+        {
+            APIContext apiContext = PaypalConfiguration.GetAPIContext();
+            double sum = double.Parse(String.Format("{0}", Request.Form["balanceInput"]));
+            try
+            {
+                string payerId = Request.Params["PayerID"];
+                if (string.IsNullOrEmpty(payerId))
+                {
+                    string baseUrI = Request.Url.Scheme + "://" + Request.Url.Authority + "Home/ProcPayment?";
+                    var guid = Convert.ToString((new Random()).Next(10000));
+                    //double sum = double.Parse(String.Format("{0}", Request.Form["balanceInput"]));
+                    var createdPayment = PaypalHandler.CreatePayment(apiContext, baseUrI + "guid=" + guid, sum);
+
+                    //get links returned from paypal response
+                    var links = createdPayment.links.GetEnumerator();
+                    string paypalRedirectUrl = string.Empty;
+
+                    while (links.MoveNext())
+                    {
+                        Links link = links.Current;
+                        if (link.rel.ToLower().Trim().Equals("approval_url"))
+                        {
+                            paypalRedirectUrl = link.href;
+                        }
+                    }
+                    Session.Add(guid, createdPayment.id);
+                    return Redirect(paypalRedirectUrl);
+                }
+                else
+                {
+                    //
+                    var guid = Request.Params["guid"];
+                    var executedPayment = PaypalHandler.ExecutePayment(apiContext, payerId, Session[guid] as string);
+                    if(executedPayment.state.ToLower() != "approved")
+                    {
+                        return View("paymentFailure");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                PaypalLogger.Log("Error: " + ex.Message);
+                return View("paymentFailure");
+            }
+            autominus2.Models.Payment ourPayment = new autominus2.Models.Payment(sum, OurSession.LoggedInUser.Id);
+            return View("BalanceReport");
+        }
+
+        public ActionResult ProcPayment()
+        {
+            return View();
+        }
+
+        public ActionResult ProcProfileEdit()
+        {
+            return View();
+        }
+
         CarsRepo carsRepo = new CarsRepo();
+        public ActionResult ProcHelpRequest()
+        {
+            return View();
+        }
+
         public ActionResult Logout()
         {
             return View();
@@ -26,7 +97,6 @@ namespace autominus.Controllers
         public ActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
@@ -233,7 +303,6 @@ namespace autominus.Controllers
 
         public ActionResult Help()
         {
-            
             return View();
         }
 

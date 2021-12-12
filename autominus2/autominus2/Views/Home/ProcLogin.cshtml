@@ -3,13 +3,14 @@
     string passw = String.Format("{0}", Request.Form["loginPasswordInput"]);
     string email = String.Format("{0}", Request.Form["loginEmailInput"]);
     autominus2.Models.User user = autominus2.Utils.UserRepo.SelectUserByEmail(email);
-    if (user is null)
+    if (user is null || !user.Password.Equals(passw))
     {
         Response.Redirect("Login");
     }
     else
     {
         autominus2.Utils.OurSession.LoggedInUser = user;
+        autominus2.Utils.OurSession.EditObject = user;
         Response.Redirect("Index");
     }
 

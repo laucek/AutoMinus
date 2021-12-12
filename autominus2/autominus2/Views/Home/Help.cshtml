@@ -1,26 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Pagalba";
 }
-
+@{ 
+    if(autominus2.Utils.OurSession.helpRequestString != null)
+    {
+        Response.Redirect("HelpReview");
+    }
+}
 
 <div class="form-group text-center">
-    <div class="col-md-10">
-        <th>Jūsų klausimas</th>
-        <br />
-        <input type="text" style="height:300px;width:300px" name="Question" />
-    </div>
+    <form method="POST" action="ProcHelpRequest">
+        <div class="col-md-10">
+            <th>Jūsų klausimas</th>
+            <br />
+            <textarea name="helpQuestionInput" cols="40" rows="5"></textarea>
+        </div>
 
-    <div class="col-md-10">
-        E-paštas
-        <br />
-        <input type="text" name="emailInputForHelp" />
-    </div>
-
-
-    <div class="col-md-10">
-        <form>
-            <button formaction="/Home/HelpReview">Pateikti</button>
-        </form>
+        <div class="col-md-10">
+        
+        <button>Pateikti</button>
+    </form>
     </div>
 </div>
 <div class="col-md-10">

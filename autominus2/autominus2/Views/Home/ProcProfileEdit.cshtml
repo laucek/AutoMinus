@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Procedura";
+
+
+    string name = String.Format("{0}", Request.Form["editNameInput"]);
+    string lastName = String.Format("{0}", Request.Form["editLastNameInput"]);
+    string userName = String.Format("{0}", Request.Form["editUserNameInput"]);
+    string city = String.Format("{0}", Request.Form["editCityInput"]);
+    string phone = String.Format("{0}", Request.Form["editPhoneInput"]);
+    string email = String.Format("{0}", Request.Form["emailInput"]);
+    string oldPass = String.Format("{0}", Request.Form["editOldPassInput"]);
+    string newPass = String.Format("{0}", Request.Form["editNewPassinput"]);
+
+    autominus2.Utils.OurSession.EditObject.Name = name;
+    autominus2.Utils.OurSession.EditObject.LastName = lastName;
+    autominus2.Utils.OurSession.EditObject.UserName = userName;
+    autominus2.Utils.OurSession.EditObject.City = city;
+    autominus2.Utils.OurSession.EditObject.PhoneNumber = phone;
+    autominus2.Utils.OurSession.EditObject.Email = email;
+
+}
+<head></head>
+<body>
+    <h1>Įvyko klaida</h1>
+    @if (autominus2.Utils.OurSession.LoggedInUser.Password != oldPass)
+    {
+
+        <div runat="server">
+            <p style="color:#FF0000;font-size: 180%">Seno slaptažodžio nesutapimas</p>
+        </div>
+
+        <a href="ProfileEdit">Grįžti į redagavimą</a>
+
+    }
+    else
+    {
+        //Update table, redirect to profile
+        Response.Redirect("Profile");
+        autominus2.Utils.OurSession.LoggedInUser.Name = name;
+        autominus2.Utils.OurSession.LoggedInUser.LastName = lastName;
+        autominus2.Utils.OurSession.LoggedInUser.UserName = userName;
+        autominus2.Utils.OurSession.LoggedInUser.City = city;
+        autominus2.Utils.OurSession.LoggedInUser.PhoneNumber = phone;
+        autominus2.Utils.OurSession.LoggedInUser.Email = email;
+        autominus2.Utils.OurSession.LoggedInUser.Password = newPass;
+
+        autominus2.Utils.UserRepo.UpdateCurrentUser();
+    }
+</body>
