@@ -240,6 +240,8 @@
     <Content Include="Views\Home\ProcLogin.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
     <Content Include="Views\Home\AdCreate.cshtml" />
+    <Content Include="Views\Home\AdDelete.cshtml" />
+    <Content Include="Views\Home\AdEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

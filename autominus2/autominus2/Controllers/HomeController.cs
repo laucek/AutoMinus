@@ -130,14 +130,33 @@ namespace autominus.Controllers
             return View(carsRepo.getAdvertisements());
         }
 
-        public ActionResult AdView()
+        [HttpGet]
+        public ActionResult AdView(int id)
         {
-            return View();
+            return View(carsRepo.getAdvertisement(id));
         }
 
-        public ActionResult AdEditView()
+        public ActionResult AdEditView(int id)
         {
-            return View();
+            return View(carsRepo.getAdvertisement(id));
+        }
+
+        [HttpPost]
+        public ActionResult AdEditView(int id, Advertisement collection)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    carsRepo.updateAdvertisement(collection);
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(collection);
+            }
         }
 
         public ActionResult AdCreateView()
@@ -189,6 +208,12 @@ namespace autominus.Controllers
                     firstRegistrationCountry, co2Emissions, city, country, phoneNumber, gearbox, bodyType);
                 CarsRepo.InsertAdvertisement(ad);
             }
+            return Index();
+        }
+
+        public ActionResult AdDelete(int id)
+        {
+            carsRepo.deleteAdvertisement(id);
             return Index();
         }
 

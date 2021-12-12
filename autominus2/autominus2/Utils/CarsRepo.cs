@@ -23,7 +23,8 @@ namespace autominus2.Utils
                 $" '{ad.SeatCount}', '{ad.WheelPosition}', '{ad.FirstRegistrationCountry}', '{ad.Co2Emissions}', '{ad.City}', '{ad.Country}'," +
                 $" '{ad.PhoneNumber}', '{ad.Gearbox}', '{ad.BodyType}', {OurSession.LoggedInUser.Id})";
 
-                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
                 mySqlConnection.Open();
@@ -41,7 +42,8 @@ namespace autominus2.Utils
         public List<Advertisement> getAdvertisements()
         {
             List<Advertisement> advertisements = new List<Advertisement>();
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
+            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
+            string conn = "server=localhost;port=3306;database=dbname;user=root;password=; convert zero datetime=True";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = "select * from Skelbimas";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -54,13 +56,42 @@ namespace autominus2.Utils
             {
                 advertisements.Add(new Advertisement
                 {
-                    Make = Convert.ToString(item["marke"]),
-                    Model = Convert.ToString(item["modelis"]),
+                    AdCreationDate = Convert.ToDateTime(item["skelbimo_sukurimo_data"]),
+                    FuelType = Convert.ToString(item["kuro_tipas"]),
+                    Mileage = Convert.ToInt32(item["rida"]),
+                    Vin = Convert.ToString(item["vin_kodas"]),
                     EngineCapacity = Convert.ToString(item["darbinis_turis"]),
-                    BodyType = Convert.ToString(item["kebulo_tipas"]),
+                    Model = Convert.ToString(item["modelis"]),
+                    Make = Convert.ToString(item["marke"]),
+                    DoorCount = Convert.ToInt32(item["duru_skaicius"]),
+                    ModelYear = Convert.ToDateTime(item["metai"]),
                     Price = Convert.ToSingle(item["kaina"]),
-                    Mileage = Convert.ToInt32(item["rida"])
-                });
+                    Drivetrain = Convert.ToInt32(item["varantieji_ratai"]),
+                    Power = Convert.ToString(item["galia"]),
+                    Damage = Convert.ToString(item["defektai"]),
+                    Color = Convert.ToString(item["spalva"]),
+                    SeatCount = Convert.ToInt32(item["sedimu_vietu_skaicius"]),
+                    WheelPosition = Convert.ToString(item["vairo_padetis"]),
+                    FirstRegistrationCountry = Convert.ToString(item["pirmosios_registracijos_salis"]),
+                    Co2Emissions = Convert.ToString(item["co2_emisija"]),
+                    City = Convert.ToString(item["miestas"]),
+                    Country = Convert.ToString(item["salis"]),
+                    PhoneNumber = Convert.ToString(item["telefono_numeris"]),
+                    Gearbox = Convert.ToString(item["pavaru_deze"]),
+                    BodyType = Convert.ToString(item["kebulo_tipas"]),
+                    FkId = Convert.ToInt32(item["fk_Naudotojasid_Naudotojas"]),
+                    Id = Convert.ToInt32(item["id"])
+            });
+
+                //advertisements.Add(new Advertisement
+                //{
+                //    Make = Convert.ToString(item["marke"]),
+                //    Model = Convert.ToString(item["modelis"]),
+                //    EngineCapacity = Convert.ToString(item["darbinis_turis"]),
+                //    BodyType = Convert.ToString(item["kebulo_tipas"]),
+                //    Price = Convert.ToSingle(item["kaina"]),
+                //    Mileage = Convert.ToInt32(item["rida"])
+                //});
             }
             return advertisements;
         }
@@ -68,10 +99,12 @@ namespace autominus2.Utils
         public Advertisement getAdvertisement(int id)
         {
             Advertisement advertisement = new Advertisement();
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
+            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
+            string conn = "server=localhost;port=3306;database=dbname;user=root;password=; convert zero datetime=True";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = "select * from Skelbimas";
+            string sqlquery = "select * from Skelbimas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlCommand.Parameters.Add("?id", MySqlDbType.VarChar).Value = id;
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
             DataTable dt = new DataTable();
@@ -79,7 +112,6 @@ namespace autominus2.Utils
             mySqlConnection.Close();
             foreach (DataRow item in dt.Rows)
             {
-                advertisement.Id = Convert.ToInt32(item["id"]);
                 advertisement.AdCreationDate = Convert.ToDateTime(item["skelbimo_sukurimo_data"]);
                 advertisement.FuelType = Convert.ToString(item["kuro_tipas"]);
                 advertisement.Mileage = Convert.ToInt32(item["rida"]);
@@ -104,8 +136,63 @@ namespace autominus2.Utils
                 advertisement.Gearbox = Convert.ToString(item["pavaru_deze"]);
                 advertisement.BodyType = Convert.ToString(item["kebulo_tipas"]);
                 advertisement.FkId = Convert.ToInt32(item["fk_Naudotojasid_Naudotojas"]);
+                advertisement.Id = Convert.ToInt32(item["id"]);
             }
             return advertisement;
+        }
+
+        public bool updateAdvertisement(Advertisement advertisement)
+        {
+            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            //string sqlquery = @"UPDATE Skelbimas a SET a.vin_kodas=?vin, a.modelis=?mod WHERE a.id=?idas";
+            string sqlquery = @"UPDATE skelbimas a SET a.kuro_tipas=?kuras, a.rida=?rida, a.vin_kodas=?vin, a.darbinis_turis=?turis, a.modelis=?model, a.marke=?marke, 
+            a.duru_skaicius=?durys, a.metai=?metai, a.kaina=?kaina, a.varantieji_ratai=?ratai, a.galia=?galia, a.defektai=?defektai, a.spalva=?spalva, 
+            a.sedimu_vietu_skaicius=?vietos, a.vairo_padetis=?vairas, a.pirmosios_registracijos_salis=?regsalis, a.co2_emisija=?co2, a.miestas=?miestas,
+            a.salis=?salis, a.telefono_numeris=?tel, a.pavaru_deze=?deze, a.kebulo_tipas=?kebulas WHERE a.id=?idas";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlCommand.Parameters.Add("?kuras", MySqlDbType.VarChar).Value = advertisement.FuelType;
+            mySqlCommand.Parameters.Add("?rida", MySqlDbType.Int32).Value = advertisement.Mileage;
+            mySqlCommand.Parameters.Add("?vin", MySqlDbType.VarChar).Value = advertisement.Vin;
+            mySqlCommand.Parameters.Add("?turis", MySqlDbType.VarChar).Value = advertisement.EngineCapacity;
+            mySqlCommand.Parameters.Add("?model", MySqlDbType.VarChar).Value = advertisement.Model;
+            mySqlCommand.Parameters.Add("?marke", MySqlDbType.VarChar).Value = advertisement.Make;
+            mySqlCommand.Parameters.Add("?durys", MySqlDbType.Int32).Value = advertisement.DoorCount;
+            mySqlCommand.Parameters.Add("?metai", MySqlDbType.DateTime).Value = advertisement.ModelYear;
+            mySqlCommand.Parameters.Add("?kaina", MySqlDbType.Float).Value = advertisement.Price;
+            mySqlCommand.Parameters.Add("?ratai", MySqlDbType.Int32).Value = advertisement.Drivetrain;
+            mySqlCommand.Parameters.Add("?galia", MySqlDbType.VarChar).Value = advertisement.Power;
+            mySqlCommand.Parameters.Add("?defektai", MySqlDbType.VarChar).Value = advertisement.Damage;
+            mySqlCommand.Parameters.Add("?spalva", MySqlDbType.VarChar).Value = advertisement.Color;
+            mySqlCommand.Parameters.Add("?vietos", MySqlDbType.Int32).Value = advertisement.SeatCount;
+            mySqlCommand.Parameters.Add("?vairas", MySqlDbType.VarChar).Value = advertisement.WheelPosition;
+            mySqlCommand.Parameters.Add("?regsalis", MySqlDbType.VarChar).Value = advertisement.FirstRegistrationCountry;
+            mySqlCommand.Parameters.Add("?co2", MySqlDbType.VarChar).Value = advertisement.Co2Emissions;
+            mySqlCommand.Parameters.Add("?miestas", MySqlDbType.VarChar).Value = advertisement.City;
+            mySqlCommand.Parameters.Add("?salis", MySqlDbType.VarChar).Value = advertisement.Country;
+            mySqlCommand.Parameters.Add("?tel", MySqlDbType.VarChar).Value = advertisement.PhoneNumber;
+            mySqlCommand.Parameters.Add("?deze", MySqlDbType.VarChar).Value = advertisement.Gearbox;
+            mySqlCommand.Parameters.Add("?kebulas", MySqlDbType.VarChar).Value = advertisement.BodyType;
+            mySqlCommand.Parameters.Add("?idas", MySqlDbType.Int32).Value = advertisement.Id;
+            mySqlConnection.Open();
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+            return true;
+        }
+
+        public bool deleteAdvertisement(int id)
+        {
+            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = @"DELETE FROM Skelbimas where id=?id";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlCommand.Parameters.Add("?id", MySqlDbType.Int32).Value = id;
+            mySqlConnection.Open();
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+            return true;
         }
     }
 }

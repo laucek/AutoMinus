@@ -17,7 +17,8 @@ namespace autominus2.Utils
             try
             {
                 string sql = $"SELECT * FROM `Naudotojas` WHERE el_pastas='{email}'";
-                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
                 mySqlConnection.Open();
@@ -54,7 +55,8 @@ namespace autominus2.Utils
                 $" VALUES ('{user.Name}', '{user.LastName}', '{user.UserName}', '{user.Password}'," +
                 $" '{user.Email}', '{user.City}', NOW(), 0, 0, '{user.PhoneNumber}', 0)";
 
-                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
                 mySqlConnection.Open();

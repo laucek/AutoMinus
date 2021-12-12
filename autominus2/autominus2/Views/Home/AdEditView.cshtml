@@ -1,46 +1,4 @@
-﻿@*@{
-        ViewData["Title"] = "Skelbimo redagavimas";
-    }
-    <h2>@ViewData["Title"]</h2>
-    <h3>@ViewData["Message"]</h3>
-
-
-    <label for="cars">Markė:</label>
-    <br />
-
-    <select name="cars" id="cars">
-        <option value="volvo">Volkswagen</option>
-        <option value="audi">BMW</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-    </select>
-
-    <div class="col-md-20">
-        <th>Modelis</th>
-        <br />
-        <input type="text" name="ModelisInput" />
-    </div>
-
-    <div class="col-md-20">
-        <th>Pagaminimo data</th>
-        <br />
-        <input type="date" name="DataInput" />
-    </div>
-
-    <div class="col-md-20">
-        <th>Rida</th>
-        <br />
-        <input type="text" name="RidaInput" />
-    </div>
-
-    <form>
-        <div class="col-md-20">
-            <br />
-            <button formaction="/Home">Patvirtinti</button>
-        </div>
-    </form>*@
-
-@model autominus2.Models.Advertisement
+﻿@model autominus2.Models.Advertisement
 
 @{
     ViewBag.Title = "Skelbimo redagavimas";
@@ -231,12 +189,12 @@
                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Išsaugoti" class="btn btn-success" />
                 </div>
             </div>
+            @*@Html.ActionLink("Išsaugoti", "AdEdit", new { id = Model.Id }, new { @class = "btn btn-primary action" })*@
         </div>
     </fieldset>
 }
