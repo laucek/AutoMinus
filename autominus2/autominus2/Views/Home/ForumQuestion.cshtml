@@ -28,11 +28,22 @@
 
                 @Html.ActionLink("Atsakyti", "NewForumAnswer", new { id = item.temos_id, naud = item.temos_autorius_id }, new { @class = "btn btn-default" })
             </tr>
-            @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+            if(autominus2.Utils.OurSession.LoggedInUser != null )
+            {
+                @Html.ActionLink("Redaguoti", "EditQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
 
-            @Html.ActionLink("Redaguoti", "EditQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+            }
+            if (autominus2.Utils.OurSession.LoggedInUser != null && autominus2.Utils.OurSession.LoggedInUser.Restrictions >10)
+            {
+                @Html.ActionLink("Archyvuoti", "ForumQuestionArchive", new { naud = item.temos_id }, new { @class = "btn btn-primary" })
 
-            @Html.ActionLink("Archyvuoti", "ForumQuestionArchive", new { naud = item.temos_id }, new { @class = "btn btn-primary" })
+            }
+            else
+            {
+                @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+            }
+
+
         }
 
 
