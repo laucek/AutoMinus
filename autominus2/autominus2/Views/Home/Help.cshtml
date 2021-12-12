@@ -26,11 +26,16 @@
     <br />
     <br />
     <br />
-
-    <form>
-        <button formaction="/Home/HelpEmail">Užduoti klausimai</button>
-        <button formaction="/Home/HelpLive">Gyvai užduoti klausimai</button>
-    </form>
+    @{
+        if (autominus2.Utils.OurSession.LoggedInUser.RoleLevel == 3 || autominus2.Utils.OurSession.LoggedInUser.RoleLevel == 4)
+        {
+            <form>
+                <button formaction="/Home/HelpEmail">Užduoti klausimai</button>
+                <button formaction="/Home/HelpLive">Gyvai užduoti klausimai</button>
+            </form>
+        }
+    }
+    
 
 </div>
 <br />

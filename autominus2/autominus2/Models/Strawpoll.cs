@@ -7,12 +7,12 @@ namespace autominus2.Models
 {
     public class Strawpoll
     {
-        public string Question;
-        public string Answer1;
-        public string Answer2;
-        public int count1;
-        public int count2;
-        public string link;
+        public string Question { get; set; }
+        public string Answer1 { get; set; }
+        public string Answer2 { get; set; }
+        public int count1 { get; set; }
+        public int count2 { get; set; }
+        public string link { get; set; }
 
         public Strawpoll()
         {

@@ -17,7 +17,7 @@ namespace autominus2.Utils
         public List<User> getUsers()
         {
             List<User> users = new List<User>();
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = "select * from Naudotojas";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -45,10 +45,10 @@ namespace autominus2.Utils
             }
             return users;
         }
-        public User getUser(int id)
+        public static User getUser(int id)
         {
             User user = new User();
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = "select * from Naudotojas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -78,7 +78,7 @@ namespace autominus2.Utils
         }
         public bool updateUser(User user)
         {
-                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 string sqlquery = @"UPDATE Naudotojas a SET a.vardas=?var, a.el_pastas=?el, a.tipas=?tip, a.galimybes=?gal WHERE a.id=?idas";
                 MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -96,7 +96,7 @@ namespace autominus2.Utils
 
         public void deleteUser(int id)
         {
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = @"DELETE FROM Naudotojas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -123,7 +123,7 @@ namespace autominus2.Utils
                 // Show poll link
                 string sql = "INSERT INTO `Apklausa`(`Antraste`, `atsakymas1`, `atsakymas2`, `linkas`,`pollId`, `fk_Naudotojasid_Naudotojas`)" +
                 $" VALUES ('{strawpoll.Question}', '{strawpoll.Answer1}', '{strawpoll.Answer2}', '{newPoll.PollUrl}','{newPoll.Id}',  1)";
-                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
                 mySqlConnection.Open();
@@ -156,7 +156,7 @@ namespace autominus2.Utils
         {
             Strawpoll strawpoll = new Strawpoll();
 
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = "SELECT * FROM `Apklausa` ORDER BY id DESC LIMIT 1";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -198,5 +198,76 @@ namespace autominus2.Utils
         {
             return await StrawPollNET.API.Get.GetPollAsync(pollId);
         }
+
+
+        public List<Question> getQuestions()
+        {
+            List<Question> questions = new List<Question>();
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = "select * from Pagalbos_prasymas where atsakyta = 0";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlConnection.Open();
+            MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
+            DataTable dt = new DataTable();
+            mda.Fill(dt);
+            mySqlConnection.Close();
+            foreach (DataRow item in dt.Rows)
+            {
+                questions.Add(new Question
+                {
+                    id = Convert.ToInt32(item["id"]),
+                    QuestionInDB = Convert.ToString(item["Klausimas"]),
+                    fk_user_id = Convert.ToInt32(item["fk_naudotojas"]),
+                    atsakyta = Convert.ToInt32(item["atsakyta"])
+                });
+            }
+            return questions;
+        }
+        public static Question getQuestion(int? id)
+        {
+            Question q = new Question();
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = "select * from Pagalbos_prasymas where id=?id";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlCommand.Parameters.Add("?id", MySqlDbType.Int32).Value = id;
+            mySqlConnection.Open();
+            MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
+            DataTable dt = new DataTable();
+            mda.Fill(dt);
+            mySqlConnection.Close();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                q.id = Convert.ToInt32(item["id"]);
+                q.QuestionInDB = Convert.ToString(item["Klausimas"]);
+                q.fk_user_id = Convert.ToInt32(item["fk_Naudotojas"]);
+                q.atsakyta = Convert.ToInt32(item["atsakyta"]);
+            }
+            return q;
+        }
+
+        public bool updateQuestion(int? id, Question question)
+        {
+            try { 
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            //string sqlquery = @"UPDATE pagalbos_prasymas a SET a.atsakyta=?at WHERE a.id=?idas";
+            string sqlquery = @"UPDATE Pagalbos_prasymas a SET a.atsakyta=?at WHERE a.id=?idas";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlCommand.Parameters.Add("?idas", MySqlDbType.Int32).Value = question.id;
+            mySqlCommand.Parameters.Add("?at", MySqlDbType.Int32).Value = 1;
+            mySqlConnection.Open();
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+            return true;
+            }
+            catch (Exception exc)
+            {
+                exc.GetType().ToString();
+                return false;
+            }
+}
     }
 }

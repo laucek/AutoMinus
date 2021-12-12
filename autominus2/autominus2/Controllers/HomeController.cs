@@ -142,7 +142,7 @@ namespace autominus.Controllers
         public ActionResult HelpEmail()
         {
 
-            return View();
+            return View(moderatorRepo.getQuestions());
         }
         public ActionResult HelpLive()
         {
@@ -243,7 +243,7 @@ namespace autominus.Controllers
         [HttpGet]
         public ActionResult PasirinktoVartotojoLangas(int id)
         {
-            return View(moderatorRepo.getUser(id));
+            return View(ModeratorRepo.getUser(id));
         }
 
         // POST: Klientas/Edit/5
@@ -273,7 +273,7 @@ namespace autominus.Controllers
         [HttpGet]
         public ActionResult Salinti(int id)
         {
-            return View(moderatorRepo.getUser(id));
+            return View(ModeratorRepo.getUser(id));
         }
 
         // POST: Klientas/Delete/5
@@ -291,7 +291,45 @@ namespace autominus.Controllers
                 return View();
             }
         }
+        [HttpGet]
+        public ActionResult HelpClose(int id)
+        {
+            return View(ModeratorRepo.getQuestion(id));
+        }
+        [HttpPost]
+        public ActionResult HelpClose(int id, Question collection)
+        {
+            try
+            {
+                moderatorRepo.updateQuestion(id, collection);
 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult HelpAnswer(int? id)
+        {
+            return View(ModeratorRepo.getQuestion(id));
+        }
+        [HttpPost]
+        public ActionResult HelpAnswer(string helpReviewTalkMsgMod)
+        {
+            try
+            {
+                UserRepo.InsertHelpMsg(helpReviewTalkMsgMod);
+
+                return RedirectToAction("HelpAnswer");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         public ActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

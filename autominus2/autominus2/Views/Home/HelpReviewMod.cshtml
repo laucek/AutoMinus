@@ -1,11 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Pagalbos suteikimas";
     string question = autominus2.Utils.OurSession.helpRequestString;
-    string text = String.Format("{0}", Request.Form["helpReviewTalkMsg"]);
+    string text = String.Format("{0}", Request.Form["helpReviewTalkMsgMod"]);
     List<autominus2.Models.Message> messages = autominus2.Utils.UserRepo.SelectMessagesById(autominus2.Utils.OurSession.helpIndex);
     if (!string.IsNullOrEmpty(text))
     {
-        if(!messages.Any(x => x.message == text))
+        if (!messages.Any(x => x.message == text))
         {
             messages.Add(new autominus2.Models.Message(autominus2.Utils.OurSession.LoggedInUser.Id, text));
             autominus2.Utils.UserRepo.InsertHelpMsg(text);
@@ -44,11 +44,11 @@
         </textarea>
     </div>
 
-    <form action="HelpReview" method="POST">
+    <form action="HelpReviewMod" method="POST">
         <div class="col-md-10">
             <th>Parašykite žinutę:</th>
             <br />
-            <textarea name="helpReviewTalkMsg" cols="40" rows="3"></textarea>
+            <textarea name="helpReviewTalkMsgMod" cols="40" rows="3"></textarea>
             <br />
             <button>Siųsti</button>
         </div>

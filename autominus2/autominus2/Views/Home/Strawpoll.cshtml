@@ -14,50 +14,53 @@
 
             <br />
             <div class="col-md-6">
-            1 atsakymas:
+                1 atsakymas:
                 <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Answer1" />
-            Rezultatai ir balsavimas:
+                Rezultatai ir balsavimas:
                 <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().link" />
             </div><div class="col-md-6">
-            2 atsakymas:
-            <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Answer2" />
+                2 atsakymas:
+                <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Answer2" />
+            </div>
         </div>
-</div>
-
-        </div>
-<div class="form-group text-center">
-    <form method="POST" action="Strawpoll1">
-        <div class="col-md-10">
-            <th>Jūsų klausimas:</th>
-            <br />
-            <input type="text" name="StrawPollQuestion" />
-        </div>
-
-        <div class="col-md-10">
-            <th>Atsakymas 1:</th>
-            <br />
-            <input type="text" name="StrawPollAnswer1" />
-        </div>
-
-        <div class="col-md-10">
-            <th>Atsakymas 2:</th>
-            <br />
-            <input type="text" name="StrawPollAnswer2" />
-        </div>
-
-        <div class="col-md-10">
-            <br />
-
-            <button>Sukurti</button>
-    </form>
-
-    <br />
-    @*Arba
-        <br />
-        <form>
-            <button formaction="/Home/Register">Registruotis</button>
-        </form>*@
 
 </div>
-</div>
-<br />
+@{ if (autominus2.Utils.OurSession.LoggedInUser.RoleLevel == 3 || autominus2.Utils.OurSession.LoggedInUser.RoleLevel == 4)
+    {
+        <div class="form-group text-center">
+            <form method="POST" action="Strawpoll1">
+                <div class="col-md-10">
+                    <th>Jūsų klausimas:</th>
+                    <br />
+                    <input type="text" name="StrawPollQuestion" />
+                </div>
+
+                <div class="col-md-10">
+                    <th>Atsakymas 1:</th>
+                    <br />
+                    <input type="text" name="StrawPollAnswer1" />
+                </div>
+
+                <div class="col-md-10">
+                    <th>Atsakymas 2:</th>
+                    <br />
+                    <input type="text" name="StrawPollAnswer2" />
+                </div>
+
+                <div class="col-md-10">
+                    <br />
+
+                    <button>Sukurti</button>
+            </form>
+
+            <br />
+            @*Arba
+                        <br />
+                        <form>
+                            <button formaction="/Home/Register">Registruotis</button>
+                        </
+                </div>form>*@
+
+        </div>
+        }
+    }
