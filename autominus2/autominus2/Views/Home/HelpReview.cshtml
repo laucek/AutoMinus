@@ -1,6 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Pagalbos suteikimas";
     string question = autominus2.Utils.OurSession.helpRequestString;
+    string text = String.Format("{0}", Request.Form["helpReviewTalkMsg"]);
+    List<autominus2.Models.Message> messages = autominus2.Utils.UserRepo.SelectMessagesById(autominus2.Utils.OurSession.helpIndex);
+    if (!string.IsNullOrEmpty(text))
+    {
+        if(!messages.Any(x => x.message == text))
+        {
+            messages.Add(new autominus2.Models.Message(autominus2.Utils.OurSession.LoggedInUser.Id, text));
+            autominus2.Utils.UserRepo.InsertHelpMsg(text);
+        }
+    }
+
 }
 
 
@@ -15,10 +26,25 @@
     <div class="col-md-10">
         <th>Pokalbis su moderatorium:</th>
         <br />
-        <textarea name="helpReviewTalkSpace" cols="40" rows="15"></textarea>
+        <textarea name="helpReviewTalkSpace" cols="40" rows="15" readonly="readonly">
+        @{ 
+            foreach (var item in messages)
+            {
+                if(item.fk_user == autominus2.Utils.OurSession.LoggedInUser.Id)
+                {
+                    @($"Jūs:\n{item.message}\n")
+                }
+                else
+                {
+                    @($"Moderatorius:\n{item.message}\n")
+                }
+            }
+
+        }
+        </textarea>
     </div>
 
-    <form action="" method="POST">
+    <form action="HelpReview" method="POST">
         <div class="col-md-10">
             <th>Parašykite žinutę:</th>
             <br />

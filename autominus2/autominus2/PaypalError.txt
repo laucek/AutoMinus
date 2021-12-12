@@ -1,0 +1,18 @@
+12-12-2021 16:54:14--->Error: The remote server returned an error: (400) Bad Request.
+Error: The remote server returned an error: (400) Bad Request.
+12-12-2021 16:57:29--->Error: The remote server returned an error: (400) Bad Request.
+Error: The remote server returned an error: (400) Bad Request.
+12-12-2021 16:57:59--->Error: The remote server returned an error: (400) Bad Request.
+Error: The remote server returned an error: (400) Bad Request.
+12-12-2021 16:58:31--->Error: The remote server returned an error: (400) Bad Request.
+Error: The remote server returned an error: (400) Bad Request.
+12-12-2021 17:00:58--->Listitems created
+12-12-2021 17:00:58--->Listitems added
+12-12-2021 17:00:58--->payment method added
+12-12-2021 17:00:58--->redirected urls created
+12-12-2021 17:00:58--->details set
+12-12-2021 17:00:58--->Amount set
+12-12-2021 17:00:58--->Transaction list created
+12-12-2021 17:00:58--->payment  set
+12-12-2021 17:00:58--->Fails to create
+12-12-2021 17:00:58--->Error: The remote server returned an error: (400) Bad Request.

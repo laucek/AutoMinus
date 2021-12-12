@@ -7,11 +7,15 @@ using autominus2.Models;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
+using PayPal;
+using System.Threading.Tasks;
 
 namespace autominus2.Utils
 {
     public class UserRepo
     {
+
         public static bool UpdateCurrentUser()
         {
             try
@@ -75,6 +79,57 @@ namespace autominus2.Utils
                 " `miestas`, `gimimo_metai`, `tipas`, `balansas`, `telefono_numeris`, `galimybes`)" +
                 $" VALUES ('{user.Name}', '{user.LastName}', '{user.UserName}', '{user.Password}'," +
                 $" '{user.Email}', '{user.City}', NOW(), 0, 0, '{user.PhoneNumber}', 0)";
+
+                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                MySqlConnection mySqlConnection = new MySqlConnection(conn);
+                MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
+                mySqlConnection.Open();
+                int temp = mySqlCommand.ExecuteNonQuery();
+                mySqlConnection.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static List<Message> SelectMessagesById(long? id)
+        {
+            try
+            {
+                string sql = $"SELECT fk_Naudotojas, Zinute FROM Pagalbos_zinutes WHERE fk_Pagalbos_prasymas={id}";
+                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                MySqlConnection mySqlConnection = new MySqlConnection(conn);
+                MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
+                mySqlConnection.Open();
+                MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
+                DataTable dt = new DataTable();
+                mda.Fill(dt);
+                mySqlConnection.Close();
+
+                List<Message> messages = new List<Message>();
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    int _id = int.Parse(Convert.ToString(item["fk_Naudotojas"]));
+                    string _msg = Convert.ToString(item["Zinute"]);
+                    messages.Add(new Message(_id, _msg));
+                }
+                return messages;
+            }
+            catch
+            {
+                return new List<Message>();
+            }
+        }
+
+        public static bool InsertHelpMsg(string message)
+        {
+            try
+            {
+                string sql = $"INSERT INTO Pagalbos_zinutes (Data, Zinute, fk_naudotojas, fk_Pagalbos_prasymas)" +
+                    $" VALUES (NOW(), '{message}', {OurSession.LoggedInUser.Id}, {OurSession.helpIndex})";
 
                 string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
