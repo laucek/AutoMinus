@@ -9,25 +9,19 @@
 <div class="form-group text-center">
     <form method="POST" action="StrawpollAnsw">
         <div class="col-md-6">
-
+            Klausimas:
             <input type="text" name="lastCreatedQuestion" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Question" />
 
             <br />
             <div class="col-md-6">
+            1 atsakymas:
                 <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Answer1" />
-
-                <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().count1" />
+            Rezultatai ir balsavimas:
+                <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().link" />
             </div><div class="col-md-6">
-    <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Answer2" />
-
-    <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().count2" />
-</div>
-    @*Arba
-        <br />
-        <form>
-            <button formaction="/Home/Register">Registruotis</button>
-        </form>*@
-
+            2 atsakymas:
+            <input type="text" name="lastCreatedQuestionA1" readonly="readonly" value="@autominus2.Utils.ModeratorRepo.getPoll().Answer2" />
+        </div>
 </div>
 
         </div>

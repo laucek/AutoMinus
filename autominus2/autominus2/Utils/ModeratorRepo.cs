@@ -13,6 +13,7 @@ namespace autominus2.Utils
 {
     public class ModeratorRepo
     {
+        StrawPollNET.Models.CreatedPoll newPoll;
         public List<User> getUsers()
         {
             List<User> users = new List<User>();
@@ -117,7 +118,7 @@ namespace autominus2.Utils
                 allOptions.Add(strawpoll.Answer1);
                 allOptions.Add(strawpoll.Answer2);
                 // Create the poll
-                StrawPollNET.Models.CreatedPoll newPoll = StrawPollNET.API.Create.CreatePoll(strawpoll.Question, allOptions, multipleChoice, dupCheck, requireCaptcha);
+                newPoll = createPoll(strawpoll.Question, allOptions, multipleChoice, dupCheck, requireCaptcha).Result;
                 
                 // Show poll link
                 string sql = "INSERT INTO `Apklausa`(`Antraste`, `atsakymas1`, `atsakymas2`, `linkas`,`pollId`, `fk_Naudotojasid_Naudotojas`)" +
@@ -170,9 +171,9 @@ namespace autominus2.Utils
                 strawpoll.Question = Convert.ToString(item["Antraste"]);
                 strawpoll.Answer1 = Convert.ToString(item["atsakymas1"]);
                 strawpoll.Answer2 = Convert.ToString(item["atsakymas2"]);
-                strawpoll.count1 = Convert.ToInt32(item["pollId"]);
+                strawpoll.link = Convert.ToString(item["linkas"]);
             }
-            StrawPollNET.Models.FetchedPoll getResp = getPollas(strawpoll.count1).Result;
+          /*  var getResp = getPoll(strawpoll.count1).Result;
             List<string> asd = new List<string>();
             List<int> dsa = new List<int>();
             foreach (KeyValuePair<string, int> result in getResp.Results)
@@ -184,7 +185,7 @@ namespace autominus2.Utils
             strawpoll.Answer1 = asd[0];
             strawpoll.count1 = dsa[0];
             strawpoll.Answer2 = asd[1];
-            strawpoll.count2 = dsa[1];
+            strawpoll.count2 = dsa[1];*/
             return strawpoll;
         }
 
@@ -193,7 +194,7 @@ namespace autominus2.Utils
             return await StrawPollNET.API.Create.CreatePollAsync(title, options, multi, dupCheck, captcha);
         }
 
-        private async static Task<StrawPollNET.Models.FetchedPoll> getPollas(int pollId)
+        private async static Task<StrawPollNET.Models.FetchedPoll> getPoll(int pollId)
         {
             return await StrawPollNET.API.Get.GetPollAsync(pollId);
         }

@@ -12,6 +12,7 @@ namespace autominus2.Models
         public string Answer2;
         public int count1;
         public int count2;
+        public string link;
 
         public Strawpoll()
         {
@@ -24,9 +25,5 @@ namespace autominus2.Models
             Answer2 = answer2;
         }
 
-        internal object GetPollAsync(int v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
