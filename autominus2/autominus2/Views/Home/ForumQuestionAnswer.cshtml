@@ -1,16 +1,51 @@
-﻿@{
-    ViewData["Title"] = "Automobiliu skelbimai";
+﻿@model IEnumerable<autominus2.Models.ForumQuestionAnswer>
+@{
+    ViewData["Title"] = "Atsakymai į temą";
 }
 
-<form>
-    <div>
-        Įrašykite savo atsakymą:
-        <br>
-        <input type="text" style="width:400px;height:200px" name="QuestionAnswer" />
-    </div>
 
-    <button formaction="/Home/ForumQuestion">Rašyti atsakymą</button>
+<table class="table table-striped datatable">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.atsakymo_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.atsakymo_tekstas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.atsakymo_laikas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.atsakymo_temos_autorius)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.atsakymo_klausimas)
+                </td>
+            </tr>
+        }
+        @*  @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })*@
+
+    </tbody>
+
+</table>
 
 
 
-</form>
+
+
+@*<form>
+        <div>
+            Įrašykite savo atsakymą:
+            <br>
+            <input type="text" style="width:400px;height:200px" name="QuestionAnswer" />
+        </div>
+
+        <button formaction="/Home/ForumQuestion">Rašyti atsakymą</button>
+
+
+
+    </form>*@

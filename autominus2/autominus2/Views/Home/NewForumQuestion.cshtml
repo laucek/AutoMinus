@@ -1,16 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Automobiliu skelbimai";
+﻿@model autominus2.Models.ForumQuestionListModel
+
+@{
+    ViewBag.Title = "NewForumQuestion";
 }
 
-<form>
-    <div>
-        Įveskite klausimo informaciją:
-        <br>
-        <input type="text" style="width:500px;height:300px" name="NewForumQuestiontext" />
-    </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    <button formaction="/Home/ForumQuestion">Patalpinti klausimą</button>
+    <fieldset>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_pavadinimas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_pavadinimas, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_pavadinimas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_tekstas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_tekstas, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_tekstas, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-</form>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Išsaugoti" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Atgal į sąrašą", "Forum", "Forum", new { @class = "btn btn-default" })
+</div>

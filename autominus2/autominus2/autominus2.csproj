@@ -254,6 +254,7 @@
     <Content Include="Views\Home\ProcCloseQuestion.cshtml" />
     <Content Include="Views\Home\ProcPayment.cshtml" />
     <Content Include="Views\Home\paymentFailure.cshtml" />
+    <Content Include="Views\Home\NewForumAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

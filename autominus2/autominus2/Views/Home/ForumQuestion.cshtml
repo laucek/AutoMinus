@@ -1,30 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Automobiliu skelbimai";
+﻿@model IEnumerable<autominus2.Models.ForumQuestionListModel>
+
+@{
+    ViewData["Title"] = "ForumQuestion";
 }
 
-<form>
-    <div class="ForumQuestionview">
+<table class="table table-striped datatable">
 
-        <p style="background-color:lightseagreen;width:100%;height:50px">
-            Forumo temos peržiūra.Temos pavadinimas
-        </p>
-    </div>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_pavadinimas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_tekstas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_autorius_id)
+                </td>
+
+            </tr>
+            @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+
+            @Html.ActionLink("Redaguoti", "EditQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+        }
 
 
-    <div style="background-color:lightseagreen;width:100%;height:200px">
-        <p>
-            Temos tekstas ---
-        </p>
-    </div>
-    <div style="background-color:lightseagreen;width:100%;height:100px">
-        <p>
-            Temos komentaras
-        </p>
-    </div>
-    <div>
-        <button formaction="/Home/ForumQuestionAnswer">Rašyti komentarą</button>
+    </tbody>
 
-        <button formaction="/Home/Forum">Grįžti į pradinį Forumo puslapį</button>
-    </div>
+</table>
 
-</form>
+
+
+@*<form>
+        <div>
+            <button formaction="/Home/ForumQuestionAnswer">Rašyti komentarą</button>
+
+            <button formaction="/Home/Forum">Grįžti į pradinį Forumo puslapį</button>
+        </div>
+    </form>*@
