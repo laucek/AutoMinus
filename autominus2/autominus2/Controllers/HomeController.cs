@@ -253,7 +253,7 @@ namespace autominus.Controllers
                 if (ModelState.IsValid)
                 {
                     questionrep.addToArchives(collect);
-                   // questionrep.delete(collect);
+                    questionrep.delete(collect);
                 }
                 return RedirectToAction("ForumArchives");
             }

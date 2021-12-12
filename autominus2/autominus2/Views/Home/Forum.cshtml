@@ -55,9 +55,12 @@
 
 </table>
 <form>
-    @if (autominus2.Utils.OurSession.LoggedInUser != null && autominus2.Utils.OurSession.LoggedInUser.Restrictions <= 1)
+    @if (autominus2.Utils.OurSession.LoggedInUser != null)
     {
-        <button formaction="/Home/NewForumQuestion">Pridėti temą</button>
+        if (autominus2.Utils.OurSession.LoggedInUser.Restrictions <= 1)
+        {
+            <button formaction="/Home/NewForumQuestion">Pridėti temą</button>
+        }
+            <button formaction="/Home/ForumArchives">Archyvai</button>
     }
-    <button formaction="/Home/ForumArchives">Archyvai</button>
-</form>
+    </form>
