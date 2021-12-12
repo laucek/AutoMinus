@@ -1,0 +1,20 @@
+﻿@{
+
+    double sum = double.Parse(String.Format("{0}", Request.Form["balanceInput"]));
+    //double sum = Request.Form["balanceInput"];
+
+    autominus2.Models.Payment payment = new autominus2.Models.Payment(sum, autominus2.Utils.OurSession.LoggedInUser.Id);
+    autominus2.Utils.UserRepo.InsertPayment(payment);
+    autominus2.Utils.OurSession.RecentPayment = payment;
+    autominus2.Utils.UserRepo.UpdateUserBalance(sum);
+    autominus2.Utils.OurSession.LoggedInUser.Balance += sum;
+
+    string businessEmail = "sb-9p54t9041724@business.example.com";
+
+    Response.Redirect("https://www.sandbox.paypal.com/" +
+        $"cgi-bin/webscr?cmd=_xclick&amount={sum}&" +
+        $"business={businessEmail}&" +
+        $"item_name=Saskaitos_pildymas&return=http://localhost:54522/Home/BalanceReport");
+
+
+}

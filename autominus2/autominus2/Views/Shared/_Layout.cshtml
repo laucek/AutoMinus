@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     @if (autominus2.Utils.OurSession.LoggedInUser is null)
                     {
-                        <li>@Html.ActionLink("Prisijungti", "Login", "Home")</li>
+                        <li>@Html.ActionLink($"{autominus2.Utils.OurSession.Language.LoginString}", "Login", "Home")</li>
                     }
                     else
                     {
@@ -32,9 +32,13 @@
                             <li>@Html.ActionLink("Vartotojų sąrašas", "VartotojuSarasoLangas", "Home")</li>
                             <li>@Html.ActionLink("StrawPoll", "Strawpoll", "Home")</li>
                         }
+                        <li>@Html.ActionLink($"{autominus2.Utils.OurSession.Language.ProfileString}", "Profile", "Home")</li>
+                        <li>@Html.ActionLink($"{autominus2.Utils.OurSession.Language.HelpRequestString}", "Help", "Home")</li>
                     }
                     <li>@Html.ActionLink("Forumas", "Forum", "Home")</li>
                     <li>@Html.ActionLink("Pagalbos prašymas", "Help", "Home")</li>
+                    <li>@Html.ActionLink("Vartotojų sąrašas", "VartotojuSarasoLangas", "Home")</li>
+                    <li>@Html.ActionLink("Vartotojų sąrašas", "Strawpoll", "Home")</li>
 
                     @if (autominus2.Utils.OurSession.LoggedInUser != null)
                     {

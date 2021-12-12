@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Procedura";
+    string question = String.Format("{0}", Request.Form["helpQuestionInput"]);
+    autominus2.Utils.OurSession.helpRequestString = question;
+    autominus2.Utils.UserRepo.InsertHelpRequest(autominus2.Utils.OurSession.LoggedInUser, question);
+
+    Response.Redirect("HelpReview");
+}
