@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using autominus2.Utils;
 using autominus2.Models;
+using autominus2.Utils;
 using MySql.Data.MySqlClient;
 using PayPal.Api;
 
@@ -84,6 +84,8 @@ namespace autominus.Controllers
             return View();
         }
 
+        ModeratorRepo moderatorRepo = new ModeratorRepo();
+
         public ActionResult Logout()
         {
             return View();
@@ -141,7 +143,7 @@ namespace autominus.Controllers
         public ActionResult HelpEmail()
         {
 
-            return View();
+            return View(moderatorRepo.getQuestions());
         }
         public ActionResult HelpLive()
         {
@@ -159,30 +161,144 @@ namespace autominus.Controllers
             return View();
         }
         //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        ForumRepo questionrep = new ForumRepo();
         public ActionResult Forum()
         {
-            return View();
+
+            return View(questionrep.GetQuestions());
         }
+
+
         public ActionResult NewForumQuestion()
         {
             return View();
         }
-        public ActionResult ForumQuestion()
+        [HttpPost]
+        public ActionResult NewForumQuestion(ForumQuestionListModel collect)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.addQuestion(collect);
+                }
+                return RedirectToAction("Forum");
+            }
+            catch
+            {
+                return View(collect);
+
+            }
+        }
+        [HttpGet]
+        public ActionResult ForumQuestion(int id)
+        {
+            return View(questionrep.GetQuestionlist(id));
+        }
+        [HttpGet]
+        public ActionResult EditQuestion(int id)
+        {
+            return View(questionrep.GetQuestion(id));
+        }
+        [HttpPost]
+        public ActionResult EditQuestion(int id, ForumQuestionListModel collect)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.UpdateQuestion(id, collect);
+                }
+                return RedirectToAction("Forum");
+            }
+            catch
+            {
+                return View(collect);
+            }
+        }
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+
+        //public ActionResult ForumQuestion(int id)
+        //{
+        //    return View(questionrep.GetQuestionsArchives(id));
+        //}
+
+        
+        [HttpGet]
+        public ActionResult ForumQuestionArchives(int id)
+        {
+            return View(questionrep.GetQuestionListArchives(id));
+        }
+
+        [HttpGet]
+        public ActionResult ForumQuestionArchive(int naud)
+        {
+            return View(questionrep.GetQuestion(naud));
+        }
+        [HttpGet]
+        public ActionResult ForumArchives()
+        {
+            return View(questionrep.GetQuestionsArchives());
+        }
+        [HttpPost]
+        public ActionResult ForumQuestionArchive(ForumQuestionListModel collect)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.addToArchives(collect);
+                    questionrep.delete(collect);
+                }
+                return RedirectToAction("ForumArchives");
+            }
+            catch
+            {
+                return View(collect);
+
+            }
+        }
+
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        public ActionResult ForumQuestionAnswer(int id)
+        {
+            return View(questionrep.GetAnswers(id));
+        }
+
+        public ActionResult NewForumAnswer()
         {
             return View();
         }
-        public ActionResult EditQuestion()
+        [HttpPost]
+        public ActionResult NewForumAnswer(int id, int naud, ForumQuestionAnswer collect)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    questionrep.addAnswer(id, naud,collect);
+                }
+                return RedirectToAction("Forum");
+            }
+            catch
+            {
+                return View(collect);
+
+            }
         }
-        public ActionResult ForumQuestionArchive()
-        {
-            return View();
-        }
-        public ActionResult ForumQuestionAnswer()
-        {
-            return View();
-        }
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
 
         public ActionResult ProfileEdit()
         {
@@ -315,19 +431,99 @@ namespace autominus.Controllers
 
         public ActionResult VartotojuSarasoLangas()
         {
-            return View();
+            return View(moderatorRepo.getUsers());
+        }
+        // GET: Klientas/Edit/5
+        [HttpGet]
+        public ActionResult PasirinktoVartotojoLangas(int id)
+        {
+            return View(ModeratorRepo.getUser(id));
         }
 
+        // POST: Klientas/Edit/5
+        [HttpPost]
+        public ActionResult PasirinktoVartotojoLangas(int id, User collection)
+            {
+            try
+            {
+                // Atnaujina kliento informacija
+                if (ModelState.IsValid)
+                {
+                    moderatorRepo.updateUser(collection);
+                }
+
+                return RedirectToAction("VartotojuSarasoLangas");
+            }
+            catch
+            {
+                return View(collection);
+            }
+        }
         public ActionResult PasirinktoVartotojoLangas()
         {
             return View();
         }
-        public ActionResult Salinti()
+        // GET: Klientas/Delete/5
+        [HttpGet]
+        public ActionResult Salinti(int id)
         {
-            ViewData["Message"] = "Šalinimas";
-            return View();
+            return View(ModeratorRepo.getUser(id));
         }
 
+        // POST: Klientas/Delete/5
+        [HttpPost]
+        public ActionResult Salinti(int id, FormCollection collection)
+        {
+            try
+            {
+                moderatorRepo.deleteUser(id);
+
+                return RedirectToAction("VartotojuSarasoLangas");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpGet]
+        public ActionResult HelpClose(int id)
+        {
+            return View(ModeratorRepo.getQuestion(id));
+        }
+        [HttpPost]
+        public ActionResult HelpClose(int id, Question collection)
+        {
+            try
+            {
+                moderatorRepo.updateQuestion(id, collection);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult HelpAnswer(int? id)
+        {
+            return View(ModeratorRepo.getQuestion(id));
+        }
+        [HttpPost]
+        public ActionResult HelpAnswer(string helpReviewTalkMsgMod)
+        {
+            try
+            {
+                UserRepo.InsertHelpMsg(helpReviewTalkMsgMod);
+
+                return RedirectToAction("HelpAnswer");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         public ActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -342,9 +538,23 @@ namespace autominus.Controllers
 
         public ActionResult Strawpoll()
         {
+
             return View();
         }
+        public ActionResult StrawpollAnsw()
+        {
+            return View();
+        }
+        public ActionResult Strawpoll1()
+        {
+            string ques = String.Format("{0}", Request.Form["StrawPollQuestion"]);
+            string ans1 = String.Format("{0}", Request.Form["StrawPollAnswer1"]);
+            string ans2 = String.Format("{0}", Request.Form["StrawPollAnswer2"]);
+            Strawpoll strawpoll = new Strawpoll(ques, ans1, ans2);
 
+            moderatorRepo.StrawPoll(strawpoll);
+            return Index();
+        }
         /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Error()
         {

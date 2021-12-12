@@ -1,40 +1,54 @@
 ﻿@{
-    ViewData["Title"] = "Strawpoll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewData["Title"]</h2>
+@model IEnumerable<autominus2.Models.Question>
 
-<p>Atsakyti: XXXXXXXXX@email.com</p>
-<div class="col-md-10">
-    <th>Užduotas Klausimas:</th>
-    <br />
-    <input type="text" name="KAIP SITE'A KURT WTF" />
-    <form>
-        <button formaction="/Home/HelpEmail">Uždaryti klausimą</button>
-    </form>
-</div>
-<div class="col-md-10">
-    <th>Užduotas Klausimas:</th>
-    <br />
-    <input type="text" name="KAIP SITE'A KURT WTF" />
-    <form>
-        <button formaction="/Home/HelpEmail">Uždaryti klausimą</button>
-    </form>
-</div>
-<div class="col-md-10">
-    <th>Užduotas Klausimas:</th>
-    <br />
-    <input type="text" name="KAIP SITE'A KURT WTF" />
-    <form>
-        <button formaction="/Home/HelpEmail">Uždaryti klausimą</button>
-    </form>
-</div>
-<div class="col-md-10">
-    <th>Užduotas Klausimas:</th>
-    <br />
-    <input type="text" name="KAIP SITE'A KURT WTF" />
-    <form>
-        <button formaction="/Home/HelpEmail">Uždaryti klausimą</button>
-    </form>
-</div>
+@{
+    ViewBag.Title = "Index";
+}
 
 
+<h2>Visi klausimai</h2>
+
+@*<p>
+        @Html.ActionLink("Naujas užsakovas", "Create", "Uzsakovas", new { @class = "btn btn-success" })
+    </p>*@
+<table class="table table-striped datatable">
+    <thead>
+        <tr style="background-color: lightblue">
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionInDB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => autominus2.Utils.ModeratorRepo.getUser(model.fk_user_id).Email)
+            </th>
+
+            <th style="width: 18%"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionInDB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => autominus2.Utils.ModeratorRepo.getUser(item.fk_user_id).Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Atsakyti", "HelpAnswer", new { id = item.id }, new { @class = "btn btn-danger action" })
+                    @Html.ActionLink("Uždaryti", "HelpClose", new { id = item.id }, new { @class = "btn btn-danger action" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

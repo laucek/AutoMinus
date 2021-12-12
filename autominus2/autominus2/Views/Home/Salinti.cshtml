@@ -1,22 +1,72 @@
-﻿@{
-    ViewData["Title"] = "Vartotojo šalinimas";
+﻿@model autominus2.Models.User
+
+@{
+    ViewBag.Title = "Šalinti vartotoją";
 }
 
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<h2>Vartotojo šalinimas</h2>
 
+<h3>Ar tikrai norite pašalinti šį vartotoją?</h3>
 <div>
-    Ar tikrai norite šalinti šį vartotoją?
-    <div class="col-md-10">
-        <br />
-        Vartotojo vardas: XXXXX <br />
-        ID: vartotojo_id <br />
-        El. paštas: vartotojo_e_pastas <br />
-        <br />
-        <form>
-            <button formaction="/Home/VartotojuSarasoLangas">Šalinti</button>
-            <button formaction="/Home/VartotojuSarasoLangas">Atgal į sąrašą</button>
-        </form>
-    </div>
+    <h4>Vartotojas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @if (ViewBag.naudojama != null)
+            {
+                <h5 style="color:red">@ViewBag.naudojama</h5>
+            }
+            else
+            {
+                <input type="submit" value="Šalinti" class="btn btn-danger" />
+            }
+            @Html.ActionLink("Atgal į sąrašą", "VartotojuSarasoLangas", "VartotojuSarasoLangas", new { @class = "btn btn-default" })
+        </div>
+    }
 </div>
-<br />

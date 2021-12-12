@@ -70,6 +70,12 @@
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
+    <Reference Include="strawpoll.NET, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StrawPoll.API.1.1.1\lib\netstandard2.0\strawpoll.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="StrawPollNET, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StrawPollNET.1.0.2\lib\netstandard2.0\StrawPollNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -166,6 +172,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ForumQuestionAnswer.cs" />
+    <Compile Include="Models\ForumQuestionListModel.cs" />
+    <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Strawpoll.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Advertisement.cs" />
@@ -250,6 +260,8 @@
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\Home\ProcLogin.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
+    <Content Include="Views\Home\Strawpoll1.cshtml" />
+    <Content Include="Views\Home\StrawpollAnsw.cshtml" />
     <Content Include="Views\Home\ProcProfileEdit.cshtml" />
     <Content Include="Views\Home\ProcHelpRequest.cshtml" />
     <Content Include="Views\Home\ProcCloseQuestion.cshtml" />
@@ -258,6 +270,12 @@
     <Content Include="Views\Home\AdCreate.cshtml" />
     <Content Include="Views\Home\AdDelete.cshtml" />
     <Content Include="Views\Home\AdEdit.cshtml" />
+    <Content Include="Views\Home\NewForumAnswer.cshtml" />
+    <Content Include="Views\Home\ForumArchives.cshtml" />
+    <Content Include="Views\Home\ForumQuestionArchives.cshtml" />
+    <Content Include="Views\Home\HelpClose.cshtml" />
+    <Content Include="Views\Home\HelpAnswer.cshtml" />
+    <Content Include="Views\Home\HelpReviewMod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

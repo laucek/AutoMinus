@@ -1,35 +1,66 @@
 ﻿@{
-    ViewData["Title"] = "Vartotojų sąrašas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<autominus2.Models.User>
+
+@{
+    ViewBag.Title = "Index";
 }
 
 
-<h2>@ViewData["Title"]</h2>
-<div class="form-group">
-    <div class="col-md-10">
-        <br />
-        <p>ID, Vartotojo vardas, El. paštas.</p>
-        <form>
-            <button formaction="/Home/PasirinktoVartotojoLangas">Peržiūrėti</button>
-            <button formaction="/Home/Salinti">Šalinti</button>
-        </form>
-        <br />
-        <p>ID, Vartotojo vardas, El. paštas.</p>
-        <form>
-            <button formaction="/Home/PasirinktoVartotojoLangas">Peržiūrėti</button>
-            <button formaction="/Home/Salinti">Šalinti</button>
-        </form>
-        <br />
-        <p>ID, Vartotojo vardas, El. paštas.</p>
-        <form>
-            <button formaction="/Home/PasirinktoVartotojoLangas">Peržiūrėti</button>
-            <button formaction="/Home/Salinti">Šalinti</button>
-        </form>
-        <br />
-        <p>ID, Vartotojo vardas, El. paštas.</p>
-        <form>
-            <button formaction="/Home/PasirinktoVartotojoLangas">Peržiūrėti</button>
-            <button formaction="/Home/Salinti">Šalinti</button>
-        </form>
+<h2>Visi užsakovai</h2>
 
-    </div>
-</div>
+@*<p>
+    @Html.ActionLink("Naujas užsakovas", "Create", "Uzsakovas", new { @class = "btn btn-success" })
+</p>*@
+<table class="table table-striped datatable">
+    <thead>
+        <tr style="background-color: lightblue">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restrictions)
+            </th>
+
+            <th style="width: 18%"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restrictions)
+                </td>
+                <td>
+                    @Html.ActionLink("Redaguoti", "PasirinktoVartotojoLangas", new { id = item.Id }, new { @class = "btn btn-primary action" })
+                    @Html.ActionLink("Šalinti", "Salinti", new { id = item.Id }, new { @class = "btn btn-danger action" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

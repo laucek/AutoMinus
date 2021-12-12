@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<autominus2.Models.ForumQuestionListModel>
 
 @{
-    ViewData["Title"] = "Forum";
+    ViewData["Title"] = "ForumArchives";
 }
 
 <table class="table table-striped datatable">
@@ -46,8 +46,7 @@
                     @Html.DisplayFor(modelItem => item.temos_autorius_id)
                 </td>
                 <td>
-                    @Html.ActionLink("Peržiūrėti", "ForumQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
-
+                    @Html.ActionLink("Peržiūrėti", "ForumQuestionArchives", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
                 </td>
             </tr>
         }
@@ -55,12 +54,5 @@
 
 </table>
 <form>
-    @if (autominus2.Utils.OurSession.LoggedInUser != null)
-    {
-        if (autominus2.Utils.OurSession.LoggedInUser.Restrictions <= 1)
-        {
-            <button formaction="/Home/NewForumQuestion">Pridėti temą</button>
-        }
-            <button formaction="/Home/ForumArchives">Archyvai</button>
-    }
-    </form>
+    <button formaction="/Home/Forum">Grįžti į forumą</button>
+</form>

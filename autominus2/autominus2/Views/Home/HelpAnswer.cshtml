@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Pagalba gyvai";
+}
+@model autominus2.Models.Question
+<h2>@ViewData["Title"]</h2>
+
+<br />
+
+@{
+    ViewData["Title"] = "Pagalbos suteikimas";
+    autominus2.Utils.OurSession.helpIndex = Model.id;
+    int a = autominus2.Utils.OurSession.LoggedInUser.Id;
+    string question = autominus2.Utils.ModeratorRepo.getQuestion(Model.id).QuestionInDB;
+    string text = String.Format("{0}", Request.Form["helpReviewTalkMsgMod"]);
+    List<autominus2.Models.Message> messages = autominus2.Utils.UserRepo.SelectMessagesById(Model.id);
+    if (!string.IsNullOrEmpty(text))
+    {
+        if (!messages.Any(x => x.message == text))
+        {
+            messages.Add(new autominus2.Models.Message(a, text));
+            autominus2.Utils.UserRepo.InsertHelpMsg(text);
+        }
+    }
+
+}
+
+<div>
+    <h4>Klausimas:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.QuestionInDB, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.QuestionInDB, 10, 20, new { @readonly = "readonly", style = "width:300px; height:100px"})
+                    @Html.ValidationMessageFor(model => model.QuestionInDB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @*<dt>
+                @Html.DisplayNameFor(model => autominus2.Utils.ModeratorRepo.getUser(model.fk_user_id).Email)
+            </dt>*@
+
+
+    </dl>
+</div>
+<div class="form-group text-center">
+
+
+    <div class="col-md-10">
+        <th>Pokalbis su naudotoju:</th>
+        <br />
+        <textarea name="helpReviewTalkSpace" cols="40" rows="15" readonly="readonly">
+        @{ 
+            foreach (var item in messages)
+            {
+                if(item.fk_user == autominus2.Utils.OurSession.LoggedInUser.Id)
+                {
+                    @($"Moderatorius:\n{item.message}\n")
+                }
+                else
+                {
+                    @($"Naudotojas:\n{item.message}\n")
+                }
+            }
+
+        }
+        </textarea>
+    </div>
+
+    <form action="@Model.id" method="POST">
+        <div class="col-md-10">
+            <th>Parašykite žinutę:</th>
+            <br />
+            <textarea name="helpReviewTalkMsgMod" cols="40" rows="3"></textarea>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Išsaugoti" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="col-md-10">
+        <br />
+
+        <form action="ProcCloseQuestion" method="POST">
+            <button>Uždaryti klausimą</button>
+        </form>
+
+    </div>
+
+</div>
+<br />
+
+<input type="text" name="KAIP SITE'A KURT WTF" />
+<form>
+    <button formaction="/Home/HelpEmail">Atgal į sąrašą</button>
+    <button formaction="/Home/HelpReview">Atsakyti į klausimą</button>
+</form>

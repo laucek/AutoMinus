@@ -1,30 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Automobiliu skelbimai";
+﻿@model IEnumerable<autominus2.Models.ForumQuestionListModel>
+
+@{
+    ViewData["Title"] = "ForumQuestion";
 }
 
+<table class="table table-striped datatable">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_pavadinimas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_tekstas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_autorius_id)
+                </td>
+
+                @if (autominus2.Utils.OurSession.LoggedInUser != null)
+                {
+                    if (autominus2.Utils.OurSession.LoggedInUser.Restrictions <= 2)
+                    {
+                        @Html.ActionLink("Atsakyti", "NewForumAnswer", new { id = item.temos_id, naud = item.temos_autorius_id }, new { @class = "btn btn-default" })
+                    }
+                }
+            </tr>
+            if (autominus2.Utils.OurSession.LoggedInUser != null)
+            {
+                if (autominus2.Utils.OurSession.LoggedInUser.Id == item.temos_autorius_id)
+                {
+                    @Html.ActionLink("Redaguoti", "EditQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+                }
+            }
+            if (autominus2.Utils.OurSession.LoggedInUser != null && autominus2.Utils.OurSession.LoggedInUser.RoleLevel > 2)
+            {
+
+                @Html.ActionLink("Archyvuoti", "ForumQuestionArchive", new { naud = item.temos_id }, new { @class = "btn btn-primary" })
+
+                @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+
+            }
+            else
+            {
+                @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+            }
+
+
+        }
+
+
+    </tbody>
+
+</table>
+
+
+
 <form>
-    <div class="ForumQuestionview">
-
-        <p style="background-color:lightseagreen;width:100%;height:50px">
-            Forumo temos peržiūra.Temos pavadinimas
-        </p>
-    </div>
-
-
-    <div style="background-color:lightseagreen;width:100%;height:200px">
-        <p>
-            Temos tekstas ---
-        </p>
-    </div>
-    <div style="background-color:lightseagreen;width:100%;height:100px">
-        <p>
-            Temos komentaras
-        </p>
-    </div>
-    <div>
-        <button formaction="/Home/ForumQuestionAnswer">Rašyti komentarą</button>
-
-        <button formaction="/Home/Forum">Grįžti į pradinį Forumo puslapį</button>
-    </div>
-
-</form>
+        <div>
+            <button formaction="/Home/Forum">Grįžti į pradinį Forumo puslapį</button>
+        </div>
+    </form>

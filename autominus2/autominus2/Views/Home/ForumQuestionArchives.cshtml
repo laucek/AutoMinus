@@ -1,0 +1,44 @@
+﻿@model IEnumerable<autominus2.Models.ForumQuestionListModel>
+
+@{
+    ViewData["Title"] = "ForumQuestion";
+}
+
+@* Naudojamas perziureti viena archyva *@
+<table class="table table-striped datatable">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.temos_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temos_pavadinimas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temos_data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temos_tekstas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temos_autorius_id)
+            </td>
+
+            @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
+        </tr>
+
+        }
+
+
+    </tbody>
+
+</table>
+<form>
+        <div>
+
+            <button formaction="/Home/ForumArchives">Grįžti į archyvus</button>
+        </div>
+    </form>
