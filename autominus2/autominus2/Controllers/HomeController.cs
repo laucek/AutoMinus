@@ -22,7 +22,7 @@ namespace autominus.Controllers
         public ActionResult ProcPaymentt()
         {
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
-            double sum = double.Parse(String.Format("{0}", Request.Form["balanceInput"]));
+            float sum = Single.Parse(String.Format("{0}", Request.Form["balanceInput"]));
             try
             {
                 string payerId = Request.Params["PayerID"];

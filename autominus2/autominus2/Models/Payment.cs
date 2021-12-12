@@ -7,11 +7,11 @@ namespace autominus2.Models
 {
     public class Payment
     {
-        public double Sum { get; set; }
+        public float Sum { get; set; }
         public int id { get; set; }
         public int fk_user { get; set; }
 
-        public Payment(double sum, int fk_user, int id = -1)
+        public Payment(float sum, int fk_user, int id = -1)
         {
             Sum = sum;
             this.id = id;

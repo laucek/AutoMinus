@@ -14,7 +14,7 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = "INSERT INTO `Skelbimas`(`skelbimo_sukurimo_data`, `kuro_tipas`, `rida`, `vin_kodas`, `darbinis_turis`," +
+                string sql = "INSERT INTO `skelbimas`(`skelbimo_sukurimo_data`, `kuro_tipas`, `rida`, `vin_kodas`, `darbinis_turis`," +
                 " `modelis`, `marke`, `duru_skaicius`, `metai`, `kaina`, `varantieji_ratai`, `galia`, `defektai`, `spalva`," +
                 " `sedimu_vietu_skaicius`, `vairo_padetis`, `pirmosios_registracijos_salis`, `co2_emisija`, `miestas`, `salis`, " +
                 " `telefono_numeris`, `pavaru_deze`, `kebulo_tipas`, `fk_Naudotojasid_Naudotojas`)" +
@@ -23,8 +23,8 @@ namespace autominus2.Utils
                 $" '{ad.SeatCount}', '{ad.WheelPosition}', '{ad.FirstRegistrationCountry}', '{ad.Co2Emissions}', '{ad.City}', '{ad.Country}'," +
                 $" '{ad.PhoneNumber}', '{ad.Gearbox}', '{ad.BodyType}', {OurSession.LoggedInUser.Id})";
 
-                string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-                //string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
+                //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+                string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
                 mySqlConnection.Open();
@@ -42,10 +42,11 @@ namespace autominus2.Utils
         public List<Advertisement> getAdvertisements()
         {
             List<Advertisement> advertisements = new List<Advertisement>();
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=;convert zero datetime = True";
+            // string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
             //string conn = "server=localhost;port=3306;database=dbname;user=root;password=; convert zero datetime=True";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = "select * from Skelbimas";
+            string sqlquery = "select * from skelbimas";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -89,10 +90,11 @@ namespace autominus2.Utils
         public Advertisement getAdvertisement(int id)
         {
             Advertisement advertisement = new Advertisement();
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=;convert zero datetime = True";
+            // string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A; convert zero datetime=True";
             //string conn = "server=localhost;port=3306;database=dbname;user=root;password=; convert zero datetime=True";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = "select * from Skelbimas where id=?id";
+            string sqlquery = "select * from skelbimas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?id", MySqlDbType.VarChar).Value = id;
             mySqlConnection.Open();
@@ -133,7 +135,8 @@ namespace autominus2.Utils
 
         public bool updateAdvertisement(Advertisement advertisement)
         {
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+           // string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             //string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             //string sqlquery = @"UPDATE Skelbimas a SET a.vin_kodas=?vin, a.modelis=?mod WHERE a.id=?idas";
@@ -173,10 +176,11 @@ namespace autominus2.Utils
 
         public bool deleteAdvertisement(int id)
         {
-            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             //string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"DELETE FROM Skelbimas where id=?id";
+            string sqlquery = @"DELETE FROM skelbimas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?id", MySqlDbType.Int32).Value = id;
             mySqlConnection.Open();

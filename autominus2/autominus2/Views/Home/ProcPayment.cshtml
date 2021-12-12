@@ -1,6 +1,6 @@
 ﻿@{
 
-    double sum = double.Parse(String.Format("{0}", Request.Form["balanceInput"]));
+    float sum = Single.Parse(String.Format("{0}", Request.Form["balanceInput"]));
     //double sum = Request.Form["balanceInput"];
 
     autominus2.Models.Payment payment = new autominus2.Models.Payment(sum, autominus2.Utils.OurSession.LoggedInUser.Id);

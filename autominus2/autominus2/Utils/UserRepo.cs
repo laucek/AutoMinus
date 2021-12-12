@@ -21,7 +21,7 @@ namespace autominus2.Utils
             try
             {
                 User usr = OurSession.LoggedInUser;
-                string sql = $"UPDATE Naudotojas a SET a.vardas='{usr.Name}', a.pavarde='{usr.LastName}', a.slapyvardis='{usr.UserName}', " +
+                string sql = $"UPDATE naudotojas a SET a.vardas='{usr.Name}', a.pavarde='{usr.LastName}', a.slapyvardis='{usr.UserName}', " +
                     $"a.slaptazodis='{usr.Password}', a.el_pastas='{usr.Email}', a.miestas='{usr.City}', a.telefono_numeris='{usr.PhoneNumber}'" +
                     $" WHERE a.id={usr.Id}";
                 //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
@@ -43,9 +43,9 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = $"SELECT * FROM `Naudotojas` WHERE el_pastas='{email}'";
+                string sql = $"SELECT * FROM `naudotojas` WHERE el_pastas='{email}'";
                 //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-                string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
+                //string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
                 //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
@@ -79,14 +79,14 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = "INSERT INTO `Naudotojas`(`vardas`, `pavarde`, `slapyvardis`, `slaptazodis`, `el_pastas`," +
+                string sql = "INSERT INTO `naudotojas`(`vardas`, `pavarde`, `slapyvardis`, `slaptazodis`, `el_pastas`," +
                 " `miestas`, `gimimo_metai`, `tipas`, `balansas`, `telefono_numeris`, `galimybes`)" +
                 $" VALUES ('{user.Name}', '{user.LastName}', '{user.UserName}', '{user.Password}'," +
                 $" '{user.Email}', '{user.City}', NOW(), 0, 0, '{user.PhoneNumber}', 0)";
 
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-                string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
+               // string conn = "server=localhost;port=3306;database=dbname;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
                 mySqlConnection.Open();
@@ -104,7 +104,7 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = $"SELECT fk_Naudotojas, Zinute FROM Pagalbos_zinutes WHERE fk_Pagalbos_prasymas={id}";
+                string sql = $"SELECT fk_Naudotojas, Zinute FROM pagalbos_zinutes WHERE fk_Pagalbos_prasymas={id}";
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
                 MySqlCommand mySqlCommand = new MySqlCommand(sql, mySqlConnection);
@@ -134,7 +134,7 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = $"INSERT INTO Pagalbos_zinutes (Data, Zinute, fk_naudotojas, fk_Pagalbos_prasymas)" +
+                string sql = $"INSERT INTO pagalbos_zinutes (Data, Zinute, fk_naudotojas, fk_Pagalbos_prasymas)" +
                     $" VALUES (NOW(), '{message}', {OurSession.LoggedInUser.Id}, {OurSession.helpIndex})";
 
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
@@ -156,7 +156,7 @@ namespace autominus2.Utils
             try
             {
                 User usr = OurSession.LoggedInUser;
-                string sql = $"UPDATE Pagalbos_prasymas a SET a.atsakyta=1 WHERE a.id ={OurSession.helpIndex}";
+                string sql = $"UPDATE pagalbos_prasymas a SET a.atsakyta=1 WHERE a.id ={OurSession.helpIndex}";
 
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
@@ -176,7 +176,7 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = $"INSERT INTO Saskaitos_pildymas (suma, fk_Naudotojasid_Naudotojas)" +
+                string sql = $"INSERT INTO saskaitos_pildymas (suma, fk_Naudotojasid_Naudotojas)" +
                     $" VALUES ({p.Sum}, {OurSession.LoggedInUser.Id})";
 
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
@@ -199,7 +199,7 @@ namespace autominus2.Utils
             try
             {
                 User usr = OurSession.LoggedInUser;
-                string sql = $"UPDATE Naudotojas a SET a.balansas={usr.Balance + amount}"+
+                string sql = $"UPDATE naudotojas a SET a.balansas={usr.Balance + amount}"+
                     $" WHERE a.id={usr.Id}";
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 MySqlConnection mySqlConnection = new MySqlConnection(conn);
@@ -219,7 +219,7 @@ namespace autominus2.Utils
         {
             try
             {
-                string sql = $"INSERT INTO Pagalbos_prasymas (Klausimas, fk_Naudotojas, atsakyta)" +
+                string sql = $"INSERT INTO pagalbos_prasymas (Klausimas, fk_Naudotojas, atsakyta)" +
                     $" VALUES ('{question}', {user.Id}, 0)";
 
                 string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
