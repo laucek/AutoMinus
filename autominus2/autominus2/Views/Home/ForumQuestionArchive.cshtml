@@ -1,23 +1,109 @@
-﻿@{
-    ViewData["Title"] = "Automobiliu skelbimai";
+﻿@model autominus2.Models.ForumQuestionListModel
+
+@{
+    ViewData["Title"] = "ForumQuestionArchive";
 }
 
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <h2>Ar tikrai norite archyvuoti?</h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_id, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_pavadinimas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_pavadinimas, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_pavadinimas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_data, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_data, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_data, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_tekstas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_tekstas, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_tekstas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.temos_autorius_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.temos_autorius_id, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.temos_autorius_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Išsaugoti" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Atgal į sąrašą", "Forum", "Forum", new { @class = "btn btn-default" })
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@*<table class="table table-striped datatable">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_pavadinimas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_tekstas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temos_autorius_id)
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
 <form>
-    <div class="ForumArchive" style="background-color:lightseagreen;width:100%;height:50px">
-        <p>
-            Archyvuojami klausimai
-        </p>
-
-    </div>
     <div>
-        <p style="background-color:lightseagreen;width:100%;height:50px;border:solid 2px">
-            Saugomas klausimas NR.1<br><button formaction="/Home/ForumQuestion">Atidaryti temą</button>
-        </p>
-        <p style="background-color:lightseagreen;width:100%;height:50px;border:solid 2px">
-            Saugomas klausimas NR.2<br><button formaction="/Home/ForumQuestion">Atidaryti temą</button>
-        </p>
-        <button formaction="/Home/Forum">Grįžti į forumą</button>
+        <button formaction="/Home/Forum">Grįžti į pradinį Forumo puslapį</button>
     </div>
-
-
-</form>
+</form>*@

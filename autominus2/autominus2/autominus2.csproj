@@ -166,6 +166,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ForumQuestionAnswer.cs" />
+    <Compile Include="Models\ForumQuestionListModel.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\User.cs" />
@@ -255,6 +257,8 @@
     <Content Include="Views\Home\ProcPayment.cshtml" />
     <Content Include="Views\Home\paymentFailure.cshtml" />
     <Content Include="Views\Home\NewForumAnswer.cshtml" />
+    <Content Include="Views\Home\ForumArchives.cshtml" />
+    <Content Include="Views\Home\ForumQuestionArchives.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

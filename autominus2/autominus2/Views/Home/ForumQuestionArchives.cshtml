@@ -26,26 +26,17 @@
                     @Html.DisplayFor(modelItem => item.temos_autorius_id)
                 </td>
 
-                @Html.ActionLink("Atsakyti", "NewForumAnswer", new { id = item.temos_id, naud = item.temos_autorius_id }, new { @class = "btn btn-default" })
             </tr>
-            @Html.ActionLink("Atsakymai", "ForumQuestionAnswer", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
 
-            @Html.ActionLink("Redaguoti", "EditQuestion", new { id = item.temos_id }, new { @class = "btn btn-primary action" })
-
-            @Html.ActionLink("Archyvuoti", "ForumQuestionArchive", new { naud = item.temos_id }, new { @class = "btn btn-primary" })
         }
 
 
     </tbody>
 
 </table>
-
-
-
 <form>
         <div>
-            <button formaction="/Home/ForumQuestionAnswer">Rašyti komentarą</button>
 
-            <button formaction="/Home/Forum">Grįžti į pradinį Forumo puslapį</button>
+            <button formaction="/Home/ForumArchives">Grįžti į archyvus</button>
         </div>
     </form>
