@@ -15,9 +15,10 @@ namespace autominus2.Utils
         {
 
             List<ForumQuestionListModel> temos = new List<ForumQuestionListModel>();
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"SELECT * FROM `archyvai` WHERE 1";
+            string sqlquery = @"SELECT * FROM `Archyvai` WHERE 1";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -43,8 +44,8 @@ namespace autominus2.Utils
 
             List<ForumQuestionListModel> temos = new List<ForumQuestionListModel>();
             //string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
-          //  string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = @"SELECT `id`, `pavadinimas`, `sukurimo_data`, `tekstas`,`fk_Naudotojasid_Naudotojas` FROM `Forumo_tema` WHERE 1";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -71,8 +72,8 @@ namespace autominus2.Utils
         {
 
             ForumQuestionListModel temos = new ForumQuestionListModel();
-            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = @"SELECT * FROM `Forumo_tema` WHERE id=" + nr;
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -96,10 +97,10 @@ namespace autominus2.Utils
         {
 
             List<ForumQuestionListModel> temos = new List<ForumQuestionListModel>();
-            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"SELECT * FROM `archyvai` WHERE id=" + nr;
+            string sqlquery = @"SELECT * FROM `Archyvai` WHERE id=" + nr;
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -124,8 +125,8 @@ namespace autominus2.Utils
         {
 
             List<ForumQuestionListModel> temos = new List<ForumQuestionListModel>();
-            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = @"SELECT * FROM `Forumo_tema` WHERE id=" + nr;
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -152,8 +153,8 @@ namespace autominus2.Utils
         {
 
             List<ForumQuestionAnswer> atsakymai = new List<ForumQuestionAnswer>();
-            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = @"SELECT * FROM `Forumo_atsakymas` WHERE fk_Forumo_temaid_Forumo_tema=" + nr;
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -180,10 +181,10 @@ namespace autominus2.Utils
         public bool UpdateQuestion(int id, ForumQuestionListModel klausimas)
         {
 
-            // string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery= @"UPDATE `forumo_tema` SET `pavadinimas`=?pav,`tekstas`=?tekst WHERE id="+id;
+            string sqlquery= @"UPDATE `Forumo_tema` SET `pavadinimas`=?pav,`tekstas`=?tekst WHERE id="+id;
             //string sqlquery = @"UPDATE `forumo_tema` SET `pavadinimas` = ?pav, `tekstas` = ?tekst, WHERE id="+id;
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
 
@@ -198,8 +199,8 @@ namespace autominus2.Utils
         }
         public bool addQuestion(ForumQuestionListModel klausimas)
         {
-            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
             string sqlquery = @"INSERT INTO `Forumo_tema`(`id`, `pavadinimas`, `sukurimo_data`, `tekstas`, `fk_Naudotojasid_Naudotojas`) VALUES (NULL, ?pav, Now(), ?tekst, 1)";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
@@ -213,10 +214,10 @@ namespace autominus2.Utils
         }
         public bool addAnswer(int id, int naud, ForumQuestionAnswer atsakymas)
         {
-            //string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"INSERT INTO `forumo_atsakymas`(`id`, `tekstas`, `data`, `fk_Naudotojasid_Naudotojas`, `fk_Forumo_temaid_Forumo_tema`) VALUES(NULL, ?tekst, Now(),?naudidd, ?idd)";
+            string sqlquery = @"INSERT INTO `Forumo_atsakymas`(`id`, `tekstas`, `data`, `fk_Naudotojasid_Naudotojas`, `fk_Forumo_temaid_Forumo_tema`) VALUES(NULL, ?tekst, Now(),?naudidd, ?idd)";
             //string sqlquery = @"INSERT INTO `Forumo_tema`(`id`, `pavadinimas`, `sukurimo_data`, `tekstas`, `fk_Naudotojasid_Naudotojas`) VALUES (NULL, ?pav, Now(), ?tekst, 1)";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
 
@@ -234,9 +235,10 @@ namespace autominus2.Utils
         }
         public bool addToArchives( ForumQuestionListModel klausimas)
         {
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"INSERT INTO `archyvai`(`id`, `pavadinimas`, `sukurimo_data`, `tekstas`, `fk_Naudotojasid_Naudotojas`) VALUES (NULL, ?pav, Now(), ?tekst, ?idd)";
+            string sqlquery = @"INSERT INTO `Archyvai`(`id`, `pavadinimas`, `sukurimo_data`, `tekstas`, `fk_Naudotojasid_Naudotojas`) VALUES (NULL, ?pav, Now(), ?tekst, ?idd)";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?idd", MySqlDbType.Int32).Value = klausimas.temos_autorius_id;
             mySqlCommand.Parameters.Add("?pav", MySqlDbType.VarChar).Value = klausimas.temos_pavadinimas;
@@ -251,9 +253,10 @@ namespace autominus2.Utils
 
         public bool delete(ForumQuestionListModel klausimas)
         {
-            string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
+            string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"DELETE FROM `forumo_tema` WHERE id=?idd";
+            string sqlquery = @"DELETE FROM `Forumo_tema` WHERE id=?idd";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?idd", MySqlDbType.Int32).Value = klausimas.temos_id;
             mySqlConnection.Open();
