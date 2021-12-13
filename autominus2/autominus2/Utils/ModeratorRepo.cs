@@ -20,7 +20,7 @@ namespace autominus2.Utils
             //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = "select * from naudotojas";
+            string sqlquery = "select * from Naudotojas";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -52,7 +52,7 @@ namespace autominus2.Utils
             //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = "select * from naudotojas where id=?id";
+            string sqlquery = "select * from Naudotojas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?id", MySqlDbType.VarChar).Value = id;
             mySqlConnection.Open();
@@ -83,7 +83,7 @@ namespace autominus2.Utils
             //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-                string sqlquery = @"UPDATE naudotojas a SET a.vardas=?var, a.el_pastas=?el, a.tipas=?tip, a.galimybes=?gal WHERE a.id=?idas";
+                string sqlquery = @"UPDATE Naudotojas a SET a.vardas=?var, a.el_pastas=?el, a.tipas=?tip, a.galimybes=?gal WHERE a.id=?idas";
                 MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
                 mySqlCommand.Parameters.Add("?idas", MySqlDbType.Int32).Value = user.Id;
                 mySqlCommand.Parameters.Add("?var", MySqlDbType.VarChar).Value = user.Name;
@@ -102,7 +102,7 @@ namespace autominus2.Utils
             //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
             string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"DELETE FROM naudotojas where id=?id";
+            string sqlquery = @"DELETE FROM Naudotojas where id=?id";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?id", MySqlDbType.VarChar).Value = id;
             mySqlConnection.Open();
@@ -125,7 +125,7 @@ namespace autominus2.Utils
                 newPoll = createPoll(strawpoll.Question, allOptions, multipleChoice, dupCheck, requireCaptcha).Result;
                 
                 // Show poll link
-                string sql = "INSERT INTO `apklausa`(`Antraste`, `atsakymas1`, `atsakymas2`, `linkas`,`pollId`, `fk_Naudotojasid_Naudotojas`)" +
+                string sql = "INSERT INTO `Apklausa`(`Antraste`, `atsakymas1`, `atsakymas2`, `linkas`,`pollId`, `fk_Naudotojasid_Naudotojas`)" +
                 $" VALUES ('{strawpoll.Question}', '{strawpoll.Answer1}', '{strawpoll.Answer2}', '{newPoll.PollUrl}','{newPoll.Id}',  1)";
                 //string conn = "server=localhost;port=3306;database=nauja;user=root;password=";
                 string conn = "server=sql11.freemysqlhosting.net;port=3306;database=sql11458082;user=sql11458082;password=2dEuRL4y8A";
